@@ -55,7 +55,7 @@ a{color:inherit;text-decoration:none}
 
 /* ============ SCENE MECÂNICA ============ */
 .scene{position:sticky;top:0;height:100vh;margin-bottom:calc(var(--h,100)*1vh - 100vh);overflow:hidden}
-.sticky{position:relative;height:100vh;overflow:hidden;transform:skewY(var(--skew,0)) scale(var(--vz,1));will-change:transform}
+.sticky{position:relative;height:100vh;overflow:hidden;transform:skewY(calc(var(--skew,0)*1deg)) scale(var(--vz,1));will-change:transform}
 .ln{display:block;overflow:hidden}
 .ln__in{display:block;transform:translateY(calc((1 - var(--r,0))*112%));will-change:transform}
 .w{display:inline-block;opacity:calc(var(--r,0));transform:translateY(calc((1 - var(--r,0))*14px));will-change:transform,opacity}
