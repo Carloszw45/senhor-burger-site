@@ -549,9 +549,9 @@ a{color:inherit;text-decoration:none}
     var pre0=eo(seg(pe,.3,.9));
     dishes.forEach(function(el,i){
       var v=eo(dishP(p,i));if(i===0)v=Math.max(v,pre0);
-      var vT=eo(clamp((v-.35)/.65,0,1));
+      var vT=eo(clamp((v-.25)/.6,0,1));
       set(el,"--vis",vT);
-      set(el,"--slide",(1-v)*-60);
+      set(el,"--slide",(1-vT)*-80);
       if(vT>.05){el.querySelectorAll(".ln__in").forEach(function(l){set(l,"--r",vT);});var d=el.querySelector("[data-words]");if(d&&d.__words)d.__words.forEach(function(w,k){set(w,"--r",eo(seg(vT,.3+k*.06,1)));});}
     });
     plates.forEach(function(el,i){var v=eo(dishP(p,i));if(i===0)v=Math.max(v,pre0);set(el,"--vis",v);set(el,"--par",(p-.5)*-34);});
