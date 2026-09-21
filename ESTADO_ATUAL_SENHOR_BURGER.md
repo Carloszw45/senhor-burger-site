@@ -15,7 +15,7 @@ URL de produção: a definir
 
 ## FASE ATUAL
 
-Protótipo v0.2 — redesign completo da coreografia de motion após feedback do cliente ('site seco, sem transições fluidas'). Em auditoria visual.
+Protótipo v0.3 — motor de motion com inércia (lerp 0.085), Viajante persistente (disco único: vírgula do 4,7 → tábua → íris do ambiente, fora das seções, uma timeline), atmosfera âmbar global, parallax em camadas. Em auditoria visual.
 
 Pesquisa ✓ → Estratégia ✓ → Conceito ✓ → Arquitetura ✓ → **Protótipo** → Aprovação → Desenvolvimento → Refinamento → QA → Publicação
 

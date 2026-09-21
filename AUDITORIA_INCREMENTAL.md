@@ -24,7 +24,7 @@
 | SB-001 | Assets | Imagens provisórias de IA contêm marca d'água ("AI生成") — substituir por fotos reais do cliente antes da publicação final | PENDENTE | — | — |
 | SB-002 | Conteúdo | Horário completo de funcionamento não confirmado (terça fechado? horário por dia) | PENDENTE | — | — |
 | SB-003 | Links | URL exata da loja no MenuDino não confirmada (usado link genérico app.menudino.com) | PENDENTE | — | — |
-| SB-004 | Motion | Feedback do cliente: protótipo v0.1 'seco, sem transições fluidas entre seções' — redesign completo da coreografia implementado na v0.2 | EM_CORRECAO | a publicar | aguardando auditoria visual v0.2 |
+| SB-004 | Motion | Feedback do cliente: protótipo 'seco, sem transições fluidas' — v0.3: motor com inércia (lerp 0.085), Viajante persistente (um objeto/uma timeline), atmosfera global, parallax em camadas | PUBLICADO | 57924b1 | auditoria Playwright v0.3: 0 erros console; probe Viajante scale=1.000; screenshots hero/cena2/cena3/footer aprovados; pendente validação humana do cliente |
 
 ## Procedimento por item
 
