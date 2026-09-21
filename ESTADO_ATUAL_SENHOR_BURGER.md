@@ -8,14 +8,14 @@ Nicho: Hamburgueria artesanal / delivery / refeição no local
 Tipo: Cliente real
 Repositório GitHub: a criar (infraestrutura atual: HTML/CSS/JS vanilla — NÃO migrar para Tailwind/daisyUI, conforme fonte 10)
 Branch principal: main
-URL de protótipo: a definir (deploy da plataforma)
+URL pública: https://carloszw45.github.io/senhor-burger-site/ (GitHub Pages — decisão do cliente, Ciclo 2)
 URL de produção: a definir
 
 ---
 
 ## FASE ATUAL
 
-Protótipo (aguardando aprovação do usuário para Desenvolvimento final)
+Protótipo v0.2 — redesign completo da coreografia de motion após feedback do cliente ('site seco, sem transições fluidas'). Em auditoria visual.
 
 Pesquisa ✓ → Estratégia ✓ → Conceito ✓ → Arquitetura ✓ → **Protótipo** → Aprovação → Desenvolvimento → Refinamento → QA → Publicação
 
@@ -115,7 +115,7 @@ Dados/reviews a validar: atribuições Alinne Gomes, Isaque Pride, Duda (forneci
 
 ## IMPLEMENTADO
 
-Protótipo funcional em HTML/CSS/JS vanilla: 6 cenas, scroll choreography stateless, transições contextuais 01→02 e 02→03 com handoff de cor/círculo, responsivo mobile/tablet/desktop, prefers-reduced-motion, lazy loading.
+Protótipo v0.2 (HTML/CSS/JS vanilla): 6 cenas com coreografia stateless expandida — letras de SENHOR levantam na saída da cena 1; queijo→glow âmbar→cena 2; contadores animados (4,7 / 1.276); vírgula do 4,7 -> disco-tábua sob o prato (handoff posicional no seam 02→03); prato com dono único e revelação circular; tábua expande como iris revelando o ambiente (03→04); bloom de neon (04→05); rota tracejada com ponto viajante (05→06); brasas flutuantes; marquee; nav esconde/mostra; rail de cenas; reveals de linha/palavra em stagger; efeitos hover. Responsivo + prefers-reduced-motion.
 
 ## EM DESENVOLVIMENTO
 
@@ -139,9 +139,10 @@ Arquivo: AUDITORIA_INCREMENTAL.md — vazia (protótipo em primeira auditoria)
 
 ## ÚLTIMA DECISÃO IMPORTANTE
 
-Data: 2026-09-21
-Decisão: Conceito "título de nobreza do burger" com paleta carvão/creme/âmbar e cenas com handoff de cor (queijo→âmbar→tábua)
-Motivo: nasce diretamente do nome "Senhor" + do rótulo real "Melhor Hambúrguer da Região" + da prova social 4,7; diferencia dos concorrentes de bairro que usam estética fast-food colorida
+Data: 2026-09-21 (Ciclo 3)
+Decisão 1: Infraestrutura = GitHub repo + GitHub Pages (instrução explícita do cliente; substitui deploy_website da plataforma). Repo: Carloszw45/senhor-burger-site
+Decisão 2: v0.2 redesenha a coreografia de motion inteira — transições nascem de OBJETOS/PALAVRAS da cena anterior (letras, vírgula→tábua, iris, neon, rota), não de fades genéricos. Motivo: feedback do cliente de que v0.1 estava "seco, só scroll".
+Decisão 3: imagens PNG 1,7MB otimizadas para JPG progressivo ~120-160KB (performance é parte do design).
 
 ## PRÓXIMO PASSO EXATO
 
