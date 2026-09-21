@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Senhor Burger — Melhor Hambúrguer da Região · Nova Contagem, Contagem/MG</title>
+<meta name="description" content="Hamburgueria artesanal em Nova Contagem, Contagem/MG. Nota 4,7 no Google com 1.276 avaliações. Delivery, happy hour e refeição no local. R. VP-1, 2454.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/burger-hero.jpg">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --carvao:#100D0A;
+  --carvao-2:#191410;
+  --creme:#F2E7D5;
+  --creme-dim:#B9AC97;
+  --ambar:#E9A13B;
+  --ambar-esc:#8A5A17;
+  --brasa:#C8502E;
+  --serif:"Fraunces",Georgia,serif;
+  --sans:"Archivo",system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--carvao);
+  color:var(--creme);
+  font-family:var(--sans);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--ambar);color:var(--carvao)}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--ambar);outline-offset:3px;border-radius:4px}
+
+/* ============ NAV ============ */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px clamp(20px,4vw,48px);
+  mix-blend-mode:difference;color:var(--creme);
+}
+.nav__mono{
+  font-family:var(--serif);font-weight:900;font-size:1.35rem;letter-spacing:.02em;
+  display:flex;align-items:center;gap:10px;
+}
+.nav__mono small{font-family:var(--sans);font-weight:600;font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;opacity:.75}
+.nav__links{display:flex;align-items:center;gap:26px;font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+.nav__links a{opacity:.8;transition:opacity .25s}
+.nav__links a:hover{opacity:1}
+.nav__cta{
+  background:var(--creme);color:var(--carvao);
+  padding:10px 18px;border-radius:999px;font-weight:700;
+  transition:transform .25s;
+}
+.nav__cta:hover{transform:translateY(-2px)}
+@media(max-width:760px){.nav__links a:not(.nav__cta){display:none}}
+
+/* ============ SCENE MECÂNICA ============ */
+.scene{position:relative;height:calc(var(--h,100)*1vh)}
+.sticky{position:sticky;top:0;height:100vh;overflow:hidden}
+.stag{will-change:transform,opacity}
+
+/* ============ CENA 01 — ABERTURA ============ */
+.c1{background:var(--carvao)}
+.c1__glow{
+  position:absolute;left:50%;bottom:-42vh;width:150vmax;height:150vmax;
+  transform:translate(-50%,calc(var(--g,0)*12vh)) scale(calc(.55 + var(--g,0)*.5));
+  background:radial-gradient(circle at 50% 62%,rgba(233,161,59,.95) 0%,rgba(200,80,46,.55) 26%,rgba(16,13,10,0) 62%);
+  opacity:calc(var(--g,0)*1.15);
+  pointer-events:none;
+}
+.c1__inner{
+  position:relative;height:100%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:0 20px;
+}
+.c1__kicker{
+  font-size:.68rem;font-weight:600;letter-spacing:.42em;text-transform:uppercase;
+  color:var(--ambar);margin-bottom:clamp(14px,2.4vh,26px);
+  opacity:var(--in,0);transform:translateY(calc((1 - var(--in,0))*18px));
+}
+.c1__title{
+  font-family:var(--serif);font-weight:600;
+  font-size:clamp(3.4rem,14.5vw,11.5rem);
+  line-height:.9;letter-spacing:-.01em;color:var(--creme);
+  display:flex;justify-content:center;
+}
+.c1__title .ch{
+  display:inline-block;
+  opacity:calc(var(--in,0)*1);
+  transform:translateY(calc((1 - var(--in,0))*(46px + var(--i)*10px))) rotate(calc((1 - var(--in,0))*4deg));
+}
+.c1__title .ch--amp{color:var(--ambar);font-style:italic;font-weight:400}
+.c1__sub{
+  margin-top:clamp(6px,1.4vh,14px);
+  font-family:var(--serif);font-style:italic;font-weight:400;
+  font-size:clamp(1rem,2.6vw,1.6rem);color:var(--creme-dim);
+  opacity:var(--in,0);transform:translateY(calc((1 - var(--in,0))*14px));
+}
+.c1__burger{
+  position:relative;z-index:2;
+  width:clamp(240px,34vw,460px);margin-top:clamp(18px,4vh,44px);
+  border-radius:18px;overflow:hidden;
+  box-shadow:0 40px 90px -30px rgba(0,0,0,.85),0 0 0 1px rgba(233,161,59,.14);
+  transform:scale(calc(1 + var(--z,0)*.16)) translateY(calc(var(--z,0)*-2vh));
+}
+.c1__burger img{width:100%;height:100%;object-fit:cover}
+.c1__hint{
+  position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+  font-size:.62rem;letter-spacing:.34em;text-transform:uppercase;color:var(--creme-dim);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  opacity:calc(1 - var(--z,0)*2.2);
+}
+.c1__hint::after{content:"";width:1px;height:34px;background:linear-gradient(var(--ambar),transparent);animation:drip 2.2s ease-in-out infinite}
+@keyframes drip{0%,100%{transform:scaleY(.4);opacity:.4}50%{transform:scaleY(1);opacity:1}}
+/* selo */
+.c1__selo{
+  position:absolute;z-index:3;top:clamp(84px,13vh,130px);right:clamp(18px,6vw,84px);
+  width:clamp(96px,11vw,150px);aspect-ratio:1;
+  opacity:var(--in,0);transform:rotate(calc((1 - var(--in,0))*-24deg)) scale(calc(.7 + var(--in,0)*.3));
+}
+@media(max-width:760px){.c1__selo{top:auto;bottom:12vh;right:16px}}
+.c1__selo svg{width:100%;height:100%}
+
+/* ============ CENA 02 — PROVA ============ */
+.c2{background:var(--ambar);color:var(--carvao)}
+.c2__inner{
+  position:relative;height:100%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;padding:0 20px;
+}
+.c2__label{
+  font-size:.68rem;font-weight:700;letter-spacing:.4em;text-transform:uppercase;
+  opacity:calc(var(--e,0));transform:translateY(calc((1 - var(--e,0))*16px));
+}
+.c2__nota{
+  font-family:var(--serif);font-weight:600;font-size:clamp(6rem,26vw,17rem);
+  line-height:.85;letter-spacing:-.03em;margin:1vh 0 0;
+  opacity:calc(var(--e,0));
+  transform:translateY(calc((1 - var(--e,0))*40px)) scale(calc(.92 + var(--e,0)*.08));
+}
+.c2__estrelas{display:flex;gap:6px;margin-top:clamp(10px,2vh,20px);opacity:calc(var(--e,0))}
+.c2__estrelas svg{width:clamp(18px,2.4vw,26px);fill:var(--carvao)}
+.c2__count{
+  font-weight:600;font-size:clamp(.85rem,1.6vw,1.05rem);margin-top:10px;
+  opacity:calc(var(--e,0));
+}
+.c2__reviews{
+  display:flex;gap:clamp(12px,2vw,24px);margin-top:clamp(24px,5vh,56px);
+  max-width:1060px;width:100%;justify-content:center;
+}
+.c2__rev{
+  flex:1;max-width:320px;text-align:left;
+  background:rgba(16,13,10,.08);
+  border:1px solid rgba(16,13,10,.18);
+  border-radius:14px;padding:clamp(14px,2vw,22px);
+  opacity:calc(var(--r,0));
+  transform:translateY(calc((1 - var(--r,0))*26px));
+}
+.c2__rev blockquote{font-family:var(--serif);font-style:italic;font-size:clamp(.85rem,1.35vw,1.02rem);line-height:1.45}
+.c2__rev figcaption{margin-top:12px;font-size:.62rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;opacity:.72}
+@media(max-width:900px){
+  .c2__reviews{flex-direction:column;align-items:center;gap:10px;margin-top:20px}
+  .c2__rev{max-width:520px;width:100%;padding:14px 16px}
+  .c2__rev blockquote{font-size:.85rem}
+}
+.c2__disc{
+  position:absolute;left:50%;top:50%;width:64vmin;height:64vmin;border-radius:50%;
+  transform:translate(-50%,-50%) scale(calc(1 + var(--d,0)*.9));
+  background:radial-gradient(circle,rgba(16,13,10,.14) 0%,rgba(16,13,10,0) 68%);
+  pointer-events:none;
+}
+
+/* ============ CENA 03 — OS CLÁSSICOS ============ */
+.c3{background:var(--carvao)}
+.c3__inner{
+  position:relative;height:100%;display:grid;
+  grid-template-columns:1fr 1.1fr;align-items:center;
+  gap:clamp(16px,4vw,70px);padding:0 clamp(24px,6vw,90px);
+}
+.c3__head{
+  position:absolute;top:clamp(76px,10vh,110px);left:clamp(24px,6vw,90px);
+  font-size:.66rem;font-weight:600;letter-spacing:.4em;text-transform:uppercase;color:var(--ambar);
+}
+.c3__text{position:relative;min-height:42vh;z-index:2}
+.c3__dish{
+  position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+  opacity:var(--vis,0);
+  transform:translateX(calc((1 - var(--vis,0))*70px));
+  pointer-events:none;
+}
+.c3__num{font-size:.66rem;font-weight:700;letter-spacing:.3em;color:var(--ambar);margin-bottom:14px}
+.c3__name{
+  font-family:var(--serif);font-weight:600;
+  font-size:clamp(2.4rem,5.6vw,4.6rem);line-height:.98;letter-spacing:-.01em;
+}
+.c3__desc{margin-top:18px;max-width:38ch;color:var(--creme-dim);line-height:1.6;font-size:clamp(.9rem,1.3vw,1.02rem)}
+.c3__tag{
+  margin-top:20px;display:inline-block;width:fit-content;
+  font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ambar);border:1px solid rgba(233,161,59,.4);border-radius:999px;padding:8px 14px;
+}
+.c3__stage{position:relative;display:flex;align-items:center;justify-content:center}
+.c3__tabua{
+  position:absolute;width:clamp(260px,34vw,470px);aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 42% 38%,#F0B45C 0%,var(--ambar) 42%,var(--ambar-esc) 100%);
+  box-shadow:0 34px 80px -24px rgba(0,0,0,.85),inset 0 2px 14px rgba(255,255,255,.28);
+  transform:scale(calc(.82 + var(--settle,0)*.18));
+  opacity:calc(.35 + var(--settle,0)*.65);
+}
+.c3__plate{
+  position:absolute;width:clamp(260px,34vw,470px);aspect-ratio:1;border-radius:50%;
+  opacity:var(--vis,0);
+  transform:translateX(calc((1 - var(--vis,0))*110px)) rotate(calc((1 - var(--vis,0))*7deg)) scale(calc(.86 + var(--vis,0)*.14));
+}
+.c3__plate img{
+  width:100%;height:100%;object-fit:cover;border-radius:50%;
+  box-shadow:0 30px 70px -22px rgba(0,0,0,.9);
+}
+.c3__cta{
+  position:absolute;bottom:clamp(28px,6vh,58px);left:clamp(24px,6vw,90px);z-index:3;
+  display:inline-flex;align-items:center;gap:12px;
+  font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--carvao);background:var(--ambar);border-radius:999px;padding:15px 24px;
+  opacity:calc(var(--c,0));transform:translateY(calc((1 - var(--c,0))*24px));
+  transition:background .25s;
+}
+.c3__cta:hover{background:var(--creme)}
+.c3__cta svg{width:14px;fill:currentColor}
+@media(max-width:900px){
+  .c3__inner{grid-template-columns:1fr;grid-template-rows:52vh 1fr;gap:0;padding-top:9vh}
+  .c3__stage{order:1}
+  .c3__text{order:2;min-height:30vh}
+  .c3__tabua,.c3__plate{width:min(58vw,330px)}
+  .c3__name{font-size:clamp(1.9rem,8vw,2.6rem)}
+  .c3__desc{font-size:.86rem;margin-top:10px;max-width:52ch}
+  .c3__head{top:76px}
+  .c3__cta{bottom:22px}
+}
+
+/* ============ CENA 04 — A CASA ============ */
+.c4{background:var(--carvao)}
+.c4__bg{position:absolute;inset:0}
+.c4__bg img{
+  width:100%;height:100%;object-fit:cover;
+  transform:scale(calc(1.14 - var(--s,0)*.14));
+  filter:brightness(calc(.45 + var(--s,0)*.55)) saturate(calc(.8 + var(--s,0)*.3));
+}
+.c4__bg::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(100deg,rgba(16,13,10,.92) 0%,rgba(16,13,10,.45) 46%,rgba(16,13,10,.12) 100%);
+}
+.c4__copy{
+  position:relative;z-index:2;height:100%;display:flex;flex-direction:column;
+  justify-content:center;padding:0 clamp(24px,6vw,90px);max-width:820px;
+}
+.c4__title{
+  font-family:var(--serif);font-weight:600;font-size:clamp(2.3rem,6vw,5rem);
+  line-height:1;letter-spacing:-.01em;
+  opacity:calc(var(--t,0));transform:translateY(calc((1 - var(--t,0))*36px));
+}
+.c4__title em{color:var(--ambar)}
+.c4__p{
+  margin-top:20px;color:var(--creme-dim);line-height:1.65;max-width:46ch;
+  font-size:clamp(.9rem,1.4vw,1.05rem);
+  opacity:calc(var(--t,0));transform:translateY(calc((1 - var(--t,0))*24px));
+}
+.c4__chips{
+  display:flex;flex-wrap:wrap;gap:10px;margin-top:30px;max-width:560px;
+  opacity:calc(var(--t,0));transform:translateY(calc((1 - var(--t,0))*18px));
+}
+.chip{
+  font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid rgba(242,231,213,.26);border-radius:999px;padding:9px 15px;color:var(--creme);
+  background:rgba(16,13,10,.35);backdrop-filter:blur(4px);
+}
+
+/* ============ CENA 05 — DELIVERY ============ */
+.c5{background:radial-gradient(120vmax 90vmax at 50% 118%,rgba(233,161,59,.22) 0%,rgba(16,13,10,0) 55%),var(--carvao)}
+.c5__inner{
+  position:relative;height:100%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;padding:0 20px;
+}
+.c5__label{
+  font-size:.66rem;font-weight:700;letter-spacing:.4em;text-transform:uppercase;color:var(--ambar);
+  opacity:calc(var(--e,0));transform:translateY(calc((1 - var(--e,0))*16px));
+}
+.c5__title{
+  font-family:var(--serif);font-weight:600;font-size:clamp(2.6rem,8.5vw,6.4rem);
+  line-height:.98;letter-spacing:-.01em;margin-top:16px;
+  opacity:calc(var(--e,0));transform:translateY(calc((1 - var(--e,0))*34px));
+}
+.c5__row{
+  display:flex;gap:clamp(12px,2.4vw,26px);margin-top:clamp(24px,4.5vh,46px);flex-wrap:wrap;justify-content:center;
+  opacity:calc(var(--e,0));transform:translateY(calc((1 - var(--e,0))*22px));
+}
+.c5__card{
+  border:1px solid rgba(242,231,213,.16);border-radius:16px;padding:18px 22px;
+  background:rgba(25,20,16,.6);text-align:left;min-width:210px;
+}
+.c5__card b{display:block;font-family:var(--serif);font-size:1.25rem;font-weight:600;color:var(--ambar)}
+.c5__card span{display:block;margin-top:6px;font-size:.78rem;color:var(--creme-dim);line-height:1.5}
+.c5__cta{
+  margin-top:clamp(26px,5vh,50px);display:inline-flex;align-items:center;gap:12px;
+  background:var(--brasa);color:var(--creme);border-radius:999px;
+  padding:17px 32px;font-weight:800;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;
+  opacity:calc(var(--e,0));transform:translateY(calc((1 - var(--e,0))*26px)) scale(calc(.94 + var(--e,0)*.06));
+  box-shadow:0 18px 50px -12px rgba(200,80,46,.55);
+  transition:transform .25s,box-shadow .25s;
+}
+.c5__cta:hover{transform:translateY(-3px);box-shadow:0 26px 60px -12px rgba(200,80,46,.7)}
+.c5__cta svg{width:18px;fill:var(--creme)}
+.c5__note{margin-top:16px;font-size:.72rem;color:var(--creme-dim);opacity:calc(var(--e,0))}
+.c5__route{
+  position:absolute;left:0;right:0;bottom:0;height:120px;width:100%;pointer-events:none;
+}
+.c5__route path{
+  fill:none;stroke:var(--ambar);stroke-width:2;stroke-dasharray:7 9;stroke-linecap:round;
+  opacity:.75;
+}
+
+/* ============ CENA 06 — FECHAMENTO ============ */
+.c6{background:var(--carvao-2);position:relative;padding:clamp(70px,12vh,120px) clamp(24px,6vw,90px) 40px}
+.c6__grid{
+  display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:clamp(24px,4vw,60px);
+  max-width:1200px;margin:0 auto;
+}
+.c6__brand{display:flex;flex-direction:column;gap:18px}
+.c6__brand .mono{font-family:var(--serif);font-weight:900;font-size:2rem;color:var(--ambar)}
+.c6__brand p{color:var(--creme-dim);font-size:.88rem;line-height:1.65;max-width:30ch}
+.c6 h3{font-size:.64rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--ambar);margin-bottom:18px}
+.c6 ul{list-style:none;display:flex;flex-direction:column;gap:12px;font-size:.9rem;color:var(--creme-dim)}
+.c6 ul a{border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.c6 ul a:hover{color:var(--ambar);border-color:rgba(233,161,59,.5)}
+.c6__selo{width:92px;margin-top:6px}
+.c6__base{
+  max-width:1200px;margin:clamp(48px,8vh,80px) auto 0;padding-top:24px;
+  border-top:1px solid rgba(242,231,213,.1);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(185,172,151,.7);
+}
+@media(max-width:900px){.c6__grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.c6__grid{grid-template-columns:1fr}}
+
+/* ============ REDUCED MOTION ============ */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .scene{height:auto}
+  .sticky{position:static;height:auto;overflow:visible}
+  .c1__inner,.c2__inner,.c5__inner{padding:80px 20px;min-height:100vh}
+  .c3__inner{padding:120px 24px;min-height:100vh}
+  .c3__text{min-height:0}
+  .c4__copy{padding:120px 24px;min-height:100vh}
+  [style*="--in"],[style*="--e"],[style*="--t"],[style*="--vis"],[style*="--z"],
+  [style*="--g"],[style*="--r"],[style*="--s"],[style*="--c"],[style*="--settle"],[style*="--d"]{
+    opacity:1 !important;transform:none !important;
+  }
+  .c3__dish{position:relative;opacity:1;transform:none;margin-bottom:40px;pointer-events:auto}
+  .c3__plate{position:relative;opacity:1;transform:none;margin-bottom:30px}
+  .c3__tabua{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" aria-label="Navegação principal">
+  <a class="nav__mono" href="#c1" aria-label="Senhor Burger — início">SB <small>Hamburgueria Artesanal</small></a>
+  <div class="nav__links">
+    <a href="#c3">Clássicos</a>
+    <a href="#c4">A Casa</a>
+    <a href="#c5">Delivery</a>
+    <a class="nav__cta" href="https://wa.me/5531975667577?text=Ol%C3%A1!%20Quero%20fazer%20um%20pedido%20no%20Senhor%20Burger." target="_blank" rel="noopener">Pedir agora</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ============ CENA 01 — ABERTURA ============ -->
+<section class="scene c1" id="c1" style="--h:160" aria-label="Abertura">
+  <div class="sticky">
+    <div class="c1__glow" data-g></div>
+    <div class="c1__inner">
+      <p class="c1__kicker stag" data-in>Nova Contagem · Contagem / MG</p>
+      <h1 class="c1__title" aria-label="Senhor Burger">
+        <span class="ch" style="--i:0" data-ch>S</span><span class="ch" style="--i:1" data-ch>E</span><span class="ch" style="--i:2" data-ch>N</span><span class="ch" style="--i:3" data-ch>H</span><span class="ch" style="--i:4" data-ch>O</span><span class="ch" style="--i:5" data-ch>R</span>
+      </h1>
+      <p class="c1__sub stag" data-in>O hambúrguer é o senhor da mesa.</p>
+      <figure class="c1__burger stag" data-zoom>
+        <img src="assets/burger-hero.jpg" alt="Hambúrguer artesanal com queijo cheddar derretido em pão brioche" width="1248" height="832" fetchpriority="high">
+      </figure>
+    </div>
+    <div class="c1__selo stag" data-in aria-hidden="true">
+      <svg viewBox="0 0 120 120">
+        <defs><path id="ring" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>
+        <circle cx="60" cy="60" r="58" fill="none" stroke="#E9A13B" stroke-width="1.4"/>
+        <circle cx="60" cy="60" r="46" fill="none" stroke="#E9A13B" stroke-width="1" opacity=".6"/>
+        <text font-family="Archivo,sans-serif" font-size="10.5" font-weight="700" letter-spacing="3.1" fill="#E9A13B">
+          <textPath href="#ring">MELHOR HAMBÚRGUER DA REGIÃO · SENHOR BURGER ·</textPath>
+        </text>
+        <path d="M60 38l6.5 13.2 14.6 2.1-10.6 10.3 2.5 14.5L60 70.9l-13 7.2 2.5-14.5L38.9 53.3l14.6-2.1z" fill="#E9A13B"/>
+      </svg>
+    </div>
+    <p class="c1__hint" data-hint>Role para provar</p>
+  </div>
+</section>
+
+<!-- ============ CENA 02 — PROVA ============ -->
+<section class="scene c2" id="c2" style="--h:150" aria-label="Avaliações">
+  <div class="sticky">
+    <div class="c2__disc" data-disc></div>
+    <div class="c2__inner">
+      <p class="c2__label stag" data-e>Quem provou, aprovou</p>
+      <p class="c2__nota stag" data-e>4,7</p>
+      <div class="c2__estrelas stag" data-e aria-label="4,7 de 5 estrelas">
+        <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.5l7.1-.6z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.5l7.1-.6z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.5l7.1-.6z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.5l7.1-.6z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.5l7.1-.6z" opacity=".25"/></svg>
+      </div>
+      <p class="c2__count stag" data-e>1.276 avaliações no Google</p>
+      <div class="c2__reviews">
+        <figure class="c2__rev stag" data-r>
+          <blockquote>"Simplesmente uma experiência maravilhosa sempre que eu venho aqui. O hambúrguer é incrível, muito saboroso, bem preparado e com ingredientes de qualidade."</blockquote>
+          <figcaption>Alinne Gomes · há 2 semanas</figcaption>
+        </figure>
+        <figure class="c2__rev stag" data-r>
+          <blockquote>"O espaço foi reformado e ficou simplesmente incrível. Perfeito para reunir a família ou comemorar datas especiais. O atendimento é impecável."</blockquote>
+          <figcaption>Isaque Pride · há 1 mês</figcaption>
+        </figure>
+        <figure class="c2__rev stag" data-r>
+          <blockquote>"Lugar muito agradável e aconchegante. Me arrisco a dizer que é um dos melhores hambúrgueres que já comi na minha vida."</blockquote>
+          <figcaption>Duda · há 6 meses</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CENA 03 — OS CLÁSSICOS ============ -->
+<section class="scene c3" id="c3" style="--h:320" aria-label="Clássicos da casa">
+  <div class="sticky">
+    <p class="c3__head">Os clássicos da casa</p>
+    <div class="c3__inner">
+      <div class="c3__text">
+        <div class="c3__dish" data-dish="0">
+          <p class="c3__num">01 / 03</p>
+          <h2 class="c3__name">Angus<br>Marilyn</h2>
+          <p class="c3__desc">O queridinho da casa: blend suculento, queijo derretido na medida e aquele acabamento que segura o suco até a última mordida.</p>
+          <span class="c3__tag">Mais pedido da região</span>
+        </div>
+        <div class="c3__dish" data-dish="1">
+          <p class="c3__num">02 / 03</p>
+          <h2 class="c3__name">Hambúrguer<br>Artesanal</h2>
+          <p class="c3__desc">O clássico que carrega o nome da casa. Pão macio, carne saborosa e o equilíbrio que virou referência em Nova Contagem.</p>
+          <span class="c3__tag">Destaque do Google</span>
+        </div>
+        <div class="c3__dish" data-dish="2">
+          <p class="c3__num">03 / 03</p>
+          <h2 class="c3__name">Beef Burger<br>+ Rústica</h2>
+          <p class="c3__desc">O par perfeito para dividir — ou não. Acompanha a batata rústica dourada, sal grosso e molho da casa.</p>
+          <span class="c3__tag">Para acompanhar</span>
+        </div>
+      </div>
+      <div class="c3__stage">
+        <div class="c3__tabua" data-settle></div>
+        <figure class="c3__plate" data-plate="0">
+          <img src="assets/burger-angus.jpg" alt="Angus Marilyn — burger com bacon e cebola caramelizada" width="1024" height="1024" loading="lazy">
+        </figure>
+        <figure class="c3__plate" data-plate="1">
+          <img src="assets/burger-hero.jpg" alt="Hambúrguer artesanal com cheddar derretido" width="1248" height="832" loading="lazy">
+        </figure>
+        <figure class="c3__plate" data-plate="2">
+          <img src="assets/wedges.jpg" alt="Batata rústica dourada com sal grosso e molho da casa" width="1024" height="1024" loading="lazy">
+        </figure>
+      </div>
+    </div>
+    <a class="c3__cta" data-cta href="https://app.menudino.com" target="_blank" rel="noopener">
+      Ver cardápio completo
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ============ CENA 04 — A CASA ============ -->
+<section class="scene c4" id="c4" style="--h:160" aria-label="A casa">
+  <div class="sticky">
+    <div class="c4__bg" data-bg>
+      <img src="assets/ambiente.jpg" alt="Interior aconchegante do Senhor Burger com pendentes âmbar e parede de tijolos" width="1248" height="832" loading="lazy">
+    </div>
+    <div class="c4__copy">
+      <h2 class="c4__title stag" data-t>Reformado para<br>receber <em>melhor.</em></h2>
+      <p class="c4__p stag" data-t>Ambiente aconchegante, luz baixa e mesa posta para família, happy hour e aquela data especial. No balcão ou na mesa, o atendimento é do jeito que o bairro gosta: pelo nome.</p>
+      <div class="c4__chips stag" data-t>
+        <span class="chip">Wi-Fi</span>
+        <span class="chip">Acessível</span>
+        <span class="chip">Família</span>
+        <span class="chip">LGBTQ+ friendly</span>
+        <span class="chip">Estacionamento</span>
+        <span class="chip">Cerveja &amp; chopp</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CENA 05 — DELIVERY ============ -->
+<section class="scene c5" id="c5" style="--h:150" aria-label="Delivery">
+  <div class="sticky">
+    <div class="c5__inner">
+      <p class="c5__label stag" data-e>Delivery · Retirada · Happy hour</p>
+      <h2 class="c5__title stag" data-e>Bateu a fome<br>em casa?</h2>
+      <div class="c5__row stag" data-e>
+        <div class="c5__card"><b>40–50 min</b><span>Entrega no bairro e região, com opção de entrega sem contato.</span></div>
+        <div class="c5__card"><b>Chopp 2x1</b><span>No balcão, nos dias de promoção. Acompanha bem um burger.</span></div>
+        <div class="c5__card"><b>Retirada</b><span>Pediu, passou, pegou. Sem fila, sem espera.</span></div>
+      </div>
+      <a class="c5__cta stag" data-e href="https://wa.me/5531975667577?text=Ol%C3%A1!%20Quero%20fazer%20um%20pedido%20no%20Senhor%20Burger." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.1 13.6c-.2.6-1.2 1.1-1.7 1.2-.4.1-1 .1-1.6-.1a13 13 0 0 1-5.7-5c-.8-1.3-1-2.4-.7-3 .2-.4.9-1 1.2-1 .3 0 .5 0 .7.4l.8 1.5c.1.2.1.4 0 .6l-.5.7c-.2.2-.2.4-.1.6.5.9 1.9 2.3 3.3 2.9.2.1.4.1.6-.1l.7-.8c.2-.2.4-.3.6-.2l1.6.8c.3.1.5.3.5.5 0 .1 0 .7-.2 1z"/></svg>
+        Pedir pelo WhatsApp
+      </a>
+      <p class="c5__note stag" data-e>(31) 97566-7577 · R. VP-1, 2454 — Nova Contagem</p>
+    </div>
+    <svg class="c5__route" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path data-route d="M0,96 C240,30 420,110 720,64 S1200,20 1440,72"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ============ CENA 06 — FECHAMENTO ============ -->
+<footer class="c6" aria-label="Informações e contato">
+  <div class="c6__grid">
+    <div class="c6__brand">
+      <span class="mono">SB</span>
+      <p>Hamburgueria artesanal em Nova Contagem. O hambúrguer é o senhor da mesa — e você é o convidado de honra.</p>
+      <svg class="c6__selo" viewBox="0 0 120 120" aria-hidden="true">
+        <circle cx="60" cy="60" r="58" fill="none" stroke="#E9A13B" stroke-width="1.4"/>
+        <text x="60" y="68" text-anchor="middle" font-family="Fraunces,serif" font-size="26" font-weight="700" fill="#E9A13B">SB</text>
+      </svg>
+    </div>
+    <div>
+      <h3>Visite</h3>
+      <ul>
+        <li>R. VP-1, 2454<br>Nova Contagem<br>Contagem/MG · 32050-602</li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=5VF4%2BG9+Nova+Contagem%2C+Contagem+-+MG" target="_blank" rel="noopener">Como chegar →</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Horários</h3>
+      <ul>
+        <li>Terça a segunda<br>18h — 00h</li>
+        <li>Terça: fechado</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Contato</h3>
+      <ul>
+        <li><a href="https://wa.me/5531975667577" target="_blank" rel="noopener">WhatsApp (31) 97566-7577</a></li>
+        <li><a href="https://www.instagram.com/senhor_burger/" target="_blank" rel="noopener">Instagram @senhor_burger</a></li>
+        <li><a href="https://app.menudino.com" target="_blank" rel="noopener">Cardápio online</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="c6__base">
+    <span>© 2026 Senhor Burger</span>
+    <span>Nova Contagem · Contagem/MG</span>
+  </div>
+</footer>
+
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var scenes = [];
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function clamp(v,a,b){ return Math.min(b, Math.max(a, v)); }
+  function seg(p,a,b){ return clamp((p - a) / (b - a), 0, 1); }
+
+  // ---- Coleta de cenas e elementos animados ----
+  document.querySelectorAll(".scene").forEach(function(sec){
+    var h = parseFloat(sec.style.getPropertyValue("--h")) || 100;
+    var rec = { el: sec, h: h, p: -1, fn: [] };
+    sec.querySelectorAll(".sticky").forEach(function(st){ rec.sticky = st; });
+    scenes.push(rec);
+  });
+
+  if(!reduced){
+    // Cena 01: entrada (0→.35), zoom burger + glow (.45→1)
+    document.querySelectorAll("#c1 [data-ch]").forEach(function(el){
+      el.__anim = function(p){
+        var inn = seg(p, 0, .32);
+        el.style.setProperty("--in", inn.toFixed(3));
+      };
+    });
+    document.querySelectorAll("#c1 [data-in]").forEach(function(el){
+      el.__anim = function(p){
+        var inn = seg(p, .04, .3);
+        el.style.setProperty("--in", inn.toFixed(3));
+      };
+    });
+    var zoom = document.querySelector("#c1 [data-zoom]");
+    var glow = document.querySelector("#c1 [data-g]");
+    var hint = document.querySelector("#c1 [data-hint]");
+    if(zoom) zoom.__anim = function(p){
+      var z = seg(p, .45, 1);
+      zoom.style.setProperty("--z", z.toFixed(3));
+    };
+    if(glow) glow.__anim = function(p){
+      var g = seg(p, .5, .98);
+      glow.style.setProperty("--g", g.toFixed(3));
+    };
+    if(hint) hint.__anim = function(p){
+      var z = seg(p, .2, .5);
+      hint.style.setProperty("--z", z.toFixed(3));
+    };
+
+    // Cena 02: entrada (.0→.3), reviews (.25→.6), disco (.6→1)
+    document.querySelectorAll("#c2 [data-e]").forEach(function(el){
+      el.__anim = function(p){ el.style.setProperty("--e", seg(p, .02, .3).toFixed(3)); };
+    });
+    document.querySelectorAll("#c2 [data-r]").forEach(function(el, i){
+      el.__anim = function(p){ el.style.setProperty("--r", seg(p, .22 + i*.08, .5 + i*.08).toFixed(3)); };
+    });
+    var disc = document.querySelector("#c2 [data-disc]");
+    if(disc) disc.__anim = function(p){ disc.style.setProperty("--d", seg(p, .55, 1).toFixed(3)); };
+
+    // Cena 03: 3 estados + assentamento da tábua + CTA
+    var dishes = document.querySelectorAll("#c3 [data-dish]");
+    var plates = document.querySelectorAll("#c3 [data-plate]");
+    var n = dishes.length;
+    function dishP(p, i){
+      var local = p * (n + .35); // .35 de folga no fim para o CTA
+      return clamp(1 - Math.abs(local - (i + .5)) * 2.2, 0, 1);
+    }
+    dishes.forEach(function(el, i){ el.__anim = function(p){ el.style.setProperty("--vis", dishP(p, i).toFixed(3)); }; });
+    plates.forEach(function(el, i){ el.__anim = function(p){ el.style.setProperty("--vis", dishP(p, i).toFixed(3)); }; });
+    var settle = document.querySelector("#c3 [data-settle]");
+    if(settle) settle.__anim = function(p){
+      var s = seg(p, 0, .18) * (1 - .15 * seg(p, .9, 1));
+      settle.style.setProperty("--settle", s.toFixed(3));
+    };
+    var cta3 = document.querySelector("#c3 [data-cta]");
+    if(cta3) cta3.__anim = function(p){ cta3.style.setProperty("--c", seg(p, .82, .96).toFixed(3)); };
+
+    // Cena 04: foto assenta (.0→.45), copy (.15→.55)
+    var bg = document.querySelector("#c4 [data-bg]");
+    if(bg) bg.__anim = function(p){ bg.style.setProperty("--s", seg(p, 0, .45).toFixed(3)); };
+    document.querySelectorAll("#c4 [data-t]").forEach(function(el, i){
+      el.__anim = function(p){ el.style.setProperty("--t", seg(p, .12 + i*.1, .5 + i*.1).toFixed(3)); };
+    });
+
+    // Cena 05: entrada (.02→.35), rota desenhada (.2→.9)
+    document.querySelectorAll("#c5 [data-e]").forEach(function(el){
+      el.__anim = function(p){ el.style.setProperty("--e", seg(p, .02, .38).toFixed(3)); };
+    });
+    var route = document.querySelector("#c5 [data-route]");
+    if(route){
+      var len = route.getTotalLength();
+      route.style.strokeDasharray = len;
+      route.__anim = function(p){
+        var r = seg(p, .15, .85);
+        route.style.strokeDashoffset = len * (1 - r);
+      };
+      route.style.strokeDashoffset = len;
+    }
+  }
+
+  // ---- Loop de scroll (stateless) ----
+  var vh = window.innerHeight;
+  function update(){
+    var y = window.scrollY || window.pageYOffset;
+    for(var i = 0; i < scenes.length; i++){
+      var s = scenes[i];
+      var top = s.el.offsetTop;
+      var total = s.el.offsetHeight - vh;
+      var p = total > 0 ? clamp((y - top) / total, 0, 1) : 0;
+      if(Math.abs(p - s.p) < .0004 && s.p >= 0) continue;
+      s.p = p;
+      s.sticky.style.setProperty("--p", p.toFixed(4));
+      var els = s.sticky.querySelectorAll("[data-ch],[data-in],[data-zoom],[data-g],[data-hint],[data-e],[data-r],[data-disc],[data-dish],[data-plate],[data-settle],[data-cta],[data-bg],[data-t],[data-route]");
+      for(var j = 0; j < els.length; j++){
+        if(els[j].__anim) els[j].__anim(p);
+      }
+    }
+  }
+  var ticking = false;
+  function onScroll(){
+    if(!ticking){
+      ticking = true;
+      requestAnimationFrame(function(){ update(); ticking = false; });
+    }
+  }
+  function measure(){ vh = window.innerHeight; update(); }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", measure);
+  window.addEventListener("load", measure);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+  update();
+})();
+</script>
+</body>
+</html>
