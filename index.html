@@ -517,7 +517,7 @@ a{color:inherit;text-decoration:none}
     scenes.forEach(function(s){s.start=s.el.offsetTop;s.total=s.el.offsetHeight-vh;s.p=-1;s.pe=-1;s.pp=-1;});
   }
 
-  function animC1(p){
+  function animC1(p,pe,pp){
     document.querySelectorAll("#c1 .ch").forEach(function(el){set(el,"--out",eo(seg(p,.62,.95)));});
     var kick=document.querySelector("[data-kick]");if(kick)set(kick,"--out",eo(seg(p,.6,.85)));
     var sub=document.querySelector("#c1 [data-words]");
