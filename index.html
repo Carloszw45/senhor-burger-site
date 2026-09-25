@@ -1,83 +1,472 @@
-<!doctype html>
-<html lang="pt-BR">
-<head>
+<!DOCTYPE html><html lang="pt-BR" style="scroll-behavior: smooth;"><head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#130f0f">
-<meta name="description" content="Senhor Burger — hamburgueria artesanal em Nova Contagem. Uma experiência em 15 faixas, com cardápio, avaliações e endereço da casa.">
-<title>Senhor Burger — Uma noite em 15 faixas</title>
-<link rel="icon" href="https://ugc.production.linktr.ee/7rw0Ef7ATtuTsijSd46a_RI0Bxg70g480EakC?io=true&size=avatar-v3_0">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Senhor Burger — Hamburgueria Artesanal em Nova Contagem</title>
+<meta name="description" content="Senhor Burger em Nova Contagem, Contagem — hambúrguer artesanal, ambiente acolhedor e pedidos online pelo MenuDino.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#CF2934">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Senhor Burger — Hamburgueria Artesanal em Nova Contagem">
+<meta property="og:description" content="Hambúrguer artesanal, ambiente acolhedor e pedidos online em Nova Contagem, Contagem — MG.">
+<link rel="icon" href="assets/images/senhor-burger/logo-senhor-burger.webp" type="image/webp">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Senhor Burger",
+  "telephone": "+55 31 97566-7577",
+  "servesCuisine": "Hambúrguer artesanal",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "R. VP-1, 2454",
+    "addressLocality": "Contagem",
+    "addressRegion": "MG",
+    "addressCountry": "BR"
+  },
+  "hasMenu": "https://senhorburgercontagem.menudino.com",
+  "sameAs": ["https://instagram.com/senhor_burger"]
+}
+</script>
+<!-- Google Fonts: Archivo Black & Manrope -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <style>
-:root{--ink:#130f0f;--red:#b91818;--paper:#f3f3f3;--muted:#cfc8c8;--line:#fff3;--fg:#f3f3f3;--ease:cubic-bezier(.22,1,.36,1);--display:"Barlow Condensed","Arial Narrow",Impact,sans-serif;--sans:"IBM Plex Sans",Arial,sans-serif;--pad:clamp(22px,5vw,88px);--head:92px;--foot:86px}
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--ink)}body{font-family:var(--sans);color:var(--fg);-webkit-font-smoothing:antialiased}button,a{font:inherit;color:inherit}button{border:0;background:none;cursor:pointer}a{text-decoration:none}img{display:block;max-width:100%}button:focus-visible,a:focus-visible{outline:2px solid currentColor;outline-offset:5px}.sr{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important}
-#app{position:fixed;inset:0;overflow:hidden;isolation:isolate;background:var(--ink)}header{position:fixed;z-index:50;left:0;right:0;top:0;height:var(--head);padding:20px var(--pad);display:flex;align-items:center;justify-content:space-between;pointer-events:none}header>*{pointer-events:auto}.logo{display:flex;align-items:center;gap:10px;text-align:left}.logo img{width:46px;height:46px;border-radius:50%}.logo strong{font-family:var(--display);font-size:22px;line-height:.82;letter-spacing:.02em}.logo small{display:block;font:500 8px var(--sans);letter-spacing:.11em;margin-top:7px}.header-links{display:flex;gap:30px;align-items:center}.header-links button,.order{font-size:13px;border-bottom:1px solid var(--line);padding:8px 0}.order{display:flex;align-items:center;gap:10px}.order svg,.next svg,.prev svg,.chapter svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6}
-#stage{position:absolute;inset:0;overflow:hidden}.scene{position:absolute;inset:0;visibility:hidden;opacity:0;pointer-events:none;overflow:hidden;padding:calc(var(--head) + 24px) var(--pad) calc(var(--foot) + 24px);background:var(--ink);color:var(--paper)}.scene.light{background:var(--paper);color:var(--ink);--muted:#5e5353;--line:#130f0f2b}.scene.red{background:var(--red);color:#fff;--muted:#ffe3e3;--line:#fff5}.scene.active{visibility:visible;opacity:1;pointer-events:auto;z-index:2}.scene.incoming{visibility:visible;opacity:1;z-index:3}.grid{height:100%;display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,8vw,130px);align-items:center}.copy{position:relative;z-index:2;max-width:620px}.eyebrow{margin:0 0 20px;font-size:11px;letter-spacing:.13em;line-height:1.5;display:flex;align-items:center;gap:10px}.eyebrow:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--red);flex:none}.red .eyebrow:before{background:#fff}h1,h2{font-family:var(--display);font-weight:700;line-height:.88;letter-spacing:-.01em;font-size:clamp(68px,9vw,160px);margin:0}h1{font-size:clamp(88px,13vw,225px)}h1 em,h2 em{font-style:normal;color:var(--red)}.red h2 em{color:var(--ink)}.copy p{max-width:39ch;font-size:16px;line-height:1.65;color:var(--muted);margin:24px 0 0}.red .copy p{color:var(--muted)}.actions{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:28px}.button{display:inline-flex;align-items:center;gap:28px;min-height:52px;background:var(--red);color:#fff;padding:14px 20px;font-size:13px;font-weight:500;transition:transform .25s,background .25s}.button:hover{transform:translateY(-2px);background:#941212}.light .button,.red .button{background:var(--ink);color:#fff}.textlink{font-size:13px;display:inline-flex;align-items:center;gap:10px;border-bottom:1px solid currentColor;padding:9px 0}.photo{height:min(70vh,650px);overflow:hidden;position:relative;border-radius:45% 0 0 0;background:#241818}.photo img{width:100%;height:100%;object-fit:cover}.photo:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#130f0f55,transparent 42%)}.light .photo:after{background:linear-gradient(90deg,#f3f3f318,transparent)}.hero .grid{display:block}.hero .copy{height:100%;display:flex;flex-direction:column;justify-content:center}.hero .photo{position:absolute;top:var(--head);right:0;bottom:var(--foot);left:47%;height:auto;border-radius:44% 0 0 0}.hero .photo:after{background:linear-gradient(90deg,#130f0f70,transparent 50%),linear-gradient(0deg,#130f0fff 0%,#130f0f10 48%)}.hero h1{position:relative;z-index:3}.hero h1 em{color:#fff}.seal{position:absolute;z-index:5;left:calc(47% - 64px);bottom:calc(var(--foot) + 16px);width:128px;height:128px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;text-align:center;transform:rotate(-10deg);font-family:var(--display);font-size:30px;line-height:.83;box-shadow:0 20px 40px #0005}.seal small{font:500 8px var(--sans);letter-spacing:.13em}.brandmark{width:min(34vw,430px);aspect-ratio:1;border-radius:50%;overflow:hidden;justify-self:center;transform:rotate(-7deg);box-shadow:0 30px 50px #0002}.brandmark img{width:100%;height:100%;object-fit:cover}.brand .copy p{max-width:42ch}.facts{display:flex;gap:20px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:20px;margin-top:24px;font-size:13px}.tracks{display:flex;flex-direction:column}.track{display:flex;align-items:center;gap:22px;border-top:1px solid var(--line);padding:19px 0;text-align:left}.track span{font-size:11px;opacity:.65}.track b{font:700 clamp(28px,3vw,48px) var(--display);line-height:.9}.track svg{margin-left:auto}.tracks p{font-size:11px;border-top:1px solid var(--line);padding-top:17px;color:var(--muted)}.product .photo{height:min(65vh,620px)}.product.reverse .copy{order:2}.product.reverse .photo{order:1}.index{position:absolute;right:2vw;bottom:calc(var(--foot) - 12px);font:700 clamp(130px,20vw,330px) var(--display);line-height:.75;color:transparent;-webkit-text-stroke:1px var(--line);pointer-events:none}.wedges .photo img{object-position:50% 53%}.shake .photo img{object-position:50% 48%}.house{padding:0}.house .photo{position:absolute;inset:0;height:auto;border-radius:0}.house .photo:after{background:linear-gradient(90deg,#130f0ff1,#130f0f7a 42%,#130f0f18),linear-gradient(0deg,#130f0fb8,transparent 27%)}.house .copy{height:100%;padding:var(--head) var(--pad) var(--foot);max-width:760px;display:flex;flex-direction:column;justify-content:center}.house h2 em{color:white}.score{font:700 clamp(170px,25vw,410px) var(--display);line-height:.78;color:var(--red);letter-spacing:-.04em}.score small{font:500 18px var(--sans);color:#716666;letter-spacing:0}.stars{color:var(--red);letter-spacing:6px;font-size:19px;margin-top:25px}.score-side{font:700 clamp(45px,6vw,100px)/.88 var(--display)}.score-side em{font-style:normal;color:var(--red)}.score-side p{font:400 16px/1.6 var(--sans);color:#625757;margin-top:25px}.reviews{text-align:center;display:flex;align-items:center;justify-content:center}.reviews .inner{max-width:1050px;width:100%}.quote{font:400 120px/1 Georgia,serif;color:var(--red);height:82px}.review{font:700 clamp(33px,5vw,80px)/1.05 var(--display);text-transform:uppercase}.review cite{display:block;margin-top:26px;font:500 14px/1.4 var(--sans);text-transform:none}.review cite small{display:block;opacity:.55;margin-top:4px}.tabs{display:flex;justify-content:center;gap:12px;margin-top:25px}.tabs button{font-size:12px;border-bottom:1px solid var(--line);padding:7px 13px}.tabs button.on{border-color:var(--red);color:var(--red)}.visit .grid{grid-template-columns:1.15fr .85fr}.address{background:var(--red);color:white;min-height:min(52vh,450px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transform:rotate(4deg);box-shadow:14px 16px 0 #130f0f12}.address strong{font:700 clamp(80px,10vw,170px)/.8 var(--display);margin:22px 0;color:var(--ink)}.address span{font-size:11px;letter-spacing:.12em}.phone{display:inline-block;margin-top:18px;font-size:14px;border-bottom:1px solid #130f0f35;padding-bottom:5px}.closing .grid{grid-template-columns:1.2fr .8fr}.closing-brand{width:min(29vw,410px);aspect-ratio:1;border-radius:50%;overflow:hidden;justify-self:center;transform:rotate(9deg)}.closing-brand img{width:100%;height:100%;object-fit:cover}.socials{display:flex;gap:25px;margin-top:25px}.wipe{position:fixed;inset:0;z-index:35;visibility:hidden;pointer-events:none;background:var(--red);overflow:hidden;clip-path:circle(0 at 50% 50%);contain:paint}.wipe.show{visibility:visible}.wipe img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}.wipe b{position:absolute;inset:0;display:grid;place-items:center;font:700 17vw var(--display);color:#fff;opacity:0}.footer{position:fixed;z-index:50;left:0;right:0;bottom:0;height:var(--foot);padding:17px var(--pad);display:flex;align-items:center;justify-content:space-between;gap:24px;color:var(--fg)}.footer:before{content:"";position:absolute;left:var(--pad);right:var(--pad);top:0;height:1px;background:var(--line)}.counter{display:flex;gap:8px;align-items:center;font-size:12px;min-width:230px}.counter b{font-weight:500;margin-left:13px;color:var(--muted)}.progress{display:flex;flex:1;max-width:520px}.progress button{flex:1;height:28px;padding:9px 3px}.progress i{display:block;height:2px;background:var(--line);transition:height .25s,background .25s}.progress button.on i{height:8px;background:var(--red)}.red~.footer .progress button.on i{background:white}.controls{display:flex;gap:8px;align-items:center}.prev,.next{display:flex;align-items:center;gap:10px;font-size:12px;padding:8px}.prev{border-right:1px solid var(--line);padding-right:18px}.prev svg{transform:rotate(180deg)}dialog{border:1px solid #fff3;background:var(--ink);color:#fff;width:min(920px,calc(100% - 32px));max-height:calc(100dvh - 32px);padding:30px}dialog::backdrop{background:#000b;backdrop-filter:blur(7px)}.dialoghead{display:flex;justify-content:space-between;align-items:start}.dialoghead h2{font-size:55px}.close{font-size:32px}.chapters{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 26px;margin-top:25px}.chapter{border-top:1px solid #fff3;padding:14px 0;display:flex;align-items:center;gap:12px;text-align:left;font-size:13px}.chapter small{opacity:.55}.chapter svg{margin-left:auto;width:15px}.dialognote{border-top:1px solid #fff3;color:#b9abab;font-size:11px;padding-top:16px;margin-top:16px}.skip{position:fixed;top:-100px;left:20px;z-index:90;background:#fff;color:#000;padding:14px}.skip:focus{top:20px}
-@media(max-width:760px){:root{--head:78px;--foot:93px;--pad:21px}header{padding-top:15px;padding-bottom:15px}.logo img{width:40px;height:40px}.logo strong{font-size:19px}.logo small{display:none}.header-links{gap:12px}.header-links button{display:none}.order{font-size:11px}.scene{padding:calc(var(--head) + 15px) var(--pad) calc(var(--foot) + 16px)}.grid{display:flex;flex-direction:column;justify-content:center;align-items:stretch;gap:18px}.hero .grid{display:block}.hero .copy{justify-content:flex-end;padding-bottom:22px}.hero .photo{left:17%;top:var(--head);bottom:var(--foot);border-radius:38% 0 0 0}.hero h1{font-size:18vw}.hero .copy p{font-size:14px;line-height:1.45;margin-top:15px}.hero .actions{margin-top:19px}.seal{width:90px;height:90px;left:auto;right:21px;top:calc(var(--head) + 18px);bottom:auto;font-size:23px}.seal small{font-size:7px}.brandmark{width:38vw;max-width:180px}.brand .copy{text-align:center}.scene.brand .grid{text-align:center;gap:22px}.brand .eyebrow{justify-content:center}.brand h2{font-size:12vw}.facts{justify-content:center;gap:13px;padding-top:16px;margin-top:18px;font-size:11px}.tracks h2{font-size:18vw}.tracks{width:100%}.track{padding:14px 0;gap:15px}.track b{font-size:26px}.track svg{width:17px}.tracks p{font-size:10px;padding-top:12px}.product .grid{gap:17px}.product .photo,.product.reverse .photo{order:0;height:25vh;max-height:235px;flex:none;border-radius:70px 0 0 0}.product .copy,.product.reverse .copy{order:1}.product h2{font-size:13vw}.product .copy p{font-size:13px;line-height:1.45;margin-top:12px}.product .actions{margin-top:17px}.index{display:none}.wedges .photo,.shake .photo{height:28vh}.house .copy{padding:var(--head) var(--pad) calc(var(--foot) + 15px);justify-content:flex-end}.house h2{font-size:13vw}.house .copy p{font-size:14px}.score .grid{gap:22px}.score{font-size:50vw}.score small{font-size:15px}.score-side{font-size:10vw}.score-side p{display:none}.stars{font-size:16px;margin-top:17px}.review{font-size:8.2vw}.quote{font-size:95px;height:66px}.review cite{font-size:12px;margin-top:20px}.tabs{margin-top:16px}.visit .grid{gap:22px}.visit h2{font-size:13vw}.address{min-height:160px;transform:rotate(2deg);width:100%}.address strong{font-size:18vw;margin:12px}.address span{font-size:9px}.visit .copy p{font-size:14px}.closing .grid{gap:18px}.closing h2{font-size:22vw}.closing-brand{position:absolute;right:var(--pad);top:calc(var(--head) + 14px);width:105px}.closing .copy{padding-top:80px}.closing .copy p{font-size:14px}.socials{gap:18px;margin-top:17px}.footer{padding:14px var(--pad) 21px;gap:8px}.counter{min-width:0;font-size:11px}.counter b{max-width:100px;margin-left:7px;line-height:1.3}.progress{position:absolute;left:var(--pad);right:var(--pad);bottom:8px;max-width:none}.controls{gap:2px}.next span{display:none}.prev{padding-right:11px}.prev svg,.next svg{width:22px}.chapters{grid-template-columns:1fr}.dialoghead h2{font-size:42px}}
-@media(max-height:600px) and (max-width:760px){:root{--head:66px;--foot:76px}.scene{padding-top:calc(var(--head) + 9px);padding-bottom:calc(var(--foot) + 9px)}.hero h1{font-size:15vw}.hero .photo{left:40%}.hero .copy{width:58%;padding-bottom:5px}.hero .copy p{font-size:12px}.seal{width:67px;height:67px;font-size:17px;right:19px}.brandmark{width:26vw}.brand h2,.product h2,.house h2,.visit h2{font-size:9vw}.product .photo,.product.reverse .photo{height:22vh}.product .copy p{font-size:11px;margin-top:8px}.button{min-height:40px;padding:9px 13px;font-size:11px}.address{min-height:115px}.address strong{font-size:12vw}.closing-brand{width:76px}.closing .copy{padding-top:45px}.closing h2{font-size:16vw}.review{font-size:6.3vw}.quote{height:45px;font-size:70px}.footer{height:var(--foot)}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:1ms!important;transition-duration:1ms!important}}
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background-color: #F3EBDD;
+      color: #181311;
+      font-family: 'Manrope', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .font-display {
+      font-family: 'Archivo Black', sans-serif;
+      letter-spacing: -0.03em;
+      line-height: 0.95;
+    }
+    @keyframes heroFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes burgerReveal {
+      from {
+        opacity: 0;
+        transform: scale(0.97) translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+    .animate-hero-text {
+      animation: heroFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .animate-burger-img {
+      animation: burgerReveal 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+    }
+
+
+    a:focus-visible, button:focus-visible {
+      outline: 3px solid #1457D9;
+      outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto !important; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
 </style>
 </head>
-<body>
-<a class="skip" href="#stage">Ir para a experiência</a>
-<div id="app" data-theme="dark">
-<header>
-<button class="logo" data-go="0" aria-label="Voltar ao início"><img src="https://ugc.production.linktr.ee/7rw0Ef7ATtuTsijSd46a_RI0Bxg70g480EakC?io=true&size=avatar-v3_0" alt=""><span><strong>SENHOR<br>BURGER</strong><small>HAMBURGUERIA ARTESANAL</small></span></button>
-<nav class="header-links" aria-label="Navegação"><button data-go="2">Os burgers</button><button data-go="10">A casa</button><button data-go="13">Visite</button></nav>
-<div class="header-links"><a class="order" href="https://senhorburgercontagem.menudino.com/" target="_blank" rel="noopener">Fazer pedido <svg viewBox="0 0 24 24"><path d="M5 19 19 5M8 5h11v11"/></svg></a><button id="open-index" aria-label="Abrir índice">☰</button></div>
+<body class="bg-[#F3EBDD] text-[#181311] selection:bg-[#CF2934] selection:text-white min-h-screen flex flex-col justify-start">
+<!-- TOP ANNOUNCEMENT / CONTEXT BADGE -->
+<aside class="w-full border-b border-[#D7C9BC] py-2 px-4 text-center bg-[#E7D8C8]/60 relative z-20">
+  <p class="text-xs font-semibold tracking-wider text-[#6F625D] uppercase">
+    Hamburgueria Artesanal · Nova Contagem
+  </p>
+</aside>
+<!-- SECTION 01: COMPACT RESTRAINED HEADER -->
+<header class="w-full bg-[#F3EBDD]/95 sticky top-0 z-50 border-b border-[#D7C9BC] transition-all">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 py-3.5 flex items-center justify-between">
+    <a class="flex items-center gap-2 group rounded-[6px] focus-visible:ring-2 focus-visible:ring-[#1457D9]" href="#top">
+      <img alt="Senhor Burger Logo" class="w-10 h-10 rounded-full object-cover group-hover:scale-105 transition-transform duration-300" src="assets/images/senhor-burger/logo-senhor-burger.webp" decoding="async">
+      <span class="font-display text-xl sm:text-2xl text-[#181311] tracking-tight group-hover:text-[#CF2934] transition-colors duration-300">SENHOR<span class="text-[#CF2934]">.</span>BURGER</span>
+    </a>
+    <nav aria-label="Navegação principal" class="hidden md:flex items-center gap-8 text-sm font-medium text-[#181311]/80">
+      <a class="hover:text-[#CF2934] transition-colors duration-200 rounded-[6px] px-1 py-0.5" href="#produtos">Produtos</a>
+      <a class="hover:text-[#CF2934] transition-colors duration-200 rounded-[6px] px-1 py-0.5" href="#acasa">A Casa</a>
+      <a class="hover:text-[#CF2934] transition-colors duration-200 rounded-[6px] px-1 py-0.5" href="#avaliacoes">Avaliações</a>
+      <a class="hover:text-[#CF2934] transition-colors duration-200 rounded-[6px] px-1 py-0.5" href="#localizacao">Localização</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <a class="inline-flex items-center justify-center bg-[#CF2934] text-white hover:bg-[#AD202A] font-semibold text-xs sm:text-sm px-4 sm:px-5 py-2.5 transition-colors duration-200 rounded-[12px]" href="https://senhorburgercontagem.menudino.com" rel="noopener noreferrer" target="_blank">
+        Pedir agora
+      </a>
+    </div>
+  </div>
 </header>
-<main id="stage" aria-live="polite">
-<section class="scene hero active" data-label="Um senhor burger" data-theme="dark" data-transition="circle" aria-labelledby="s1">
-<div class="grid"><div class="copy"><p class="eyebrow">HAMBURGUERIA ARTESANAL · NOVA CONTAGEM</p><h1 id="s1">UM SENHOR<br><em>BURGER.</em></h1><p>Tem nome. Tem personalidade. E tem lugar na sua próxima noite.</p><div class="actions"><button class="button" data-go="1">Conheça a casa <svg viewBox="0 0 24 24"><path d="M4 12h16M13 5l7 7-7 7"/></svg></button><a class="textlink" href="https://senhorburgercontagem.menudino.com/" target="_blank" rel="noopener">Ver cardápio</a></div></div><figure class="photo"><img fetchpriority="high" src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlfl8rJYQtvpG5FiSFbpwpQD9X1k9RXxY-iYNdNQaUNiI-ce6M0QPeuBRUi7YKOBgh1l2oNcpKOowIu19LYRNjfFbiEQtjNe0CanGJSxyEKZIBlj6K4FqPtBqh8KgB-tT-FDmaW=w1600-h1600-k-no" alt="Hambúrguer artesanal com batatas e molho"></figure><button class="seal" data-go="1"><small>FEITO PARA</small><span>dar<br>vontade.</span><small>CONTAGEM · MG</small></button></div>
-</section>
-<section class="scene light brand" data-label="Muito prazer, Senhor" data-theme="light" data-transition="color" aria-labelledby="s2"><div class="grid"><div class="brandmark portal"><img src="https://ugc.production.linktr.ee/7rw0Ef7ATtuTsijSd46a_RI0Bxg70g480EakC?io=true&size=avatar-v3_0" alt="Logo original Senhor Burger"></div><div class="copy"><p class="eyebrow">MUITO PRAZER</p><h2 id="s2">PODE CHAMAR<br>DE <em>SENHOR.</em></h2><p>Hamburgueria artesanal em Nova Contagem. Para sentar à mesa, levar para casa ou pedir de onde estiver.</p><div class="facts"><span>Na casa</span><span>Para viagem</span><span>Delivery</span></div></div></div></section>
-<section class="scene red tracks" data-label="O repertório" data-theme="red" data-transition="word" aria-labelledby="s3"><div class="grid"><div class="copy"><p class="eyebrow">O CARDÁPIO TEM RITMO</p><h2 id="s3">GRANDES<br><em>HITS.</em></h2><p>Os nomes são de ícones. O próximo favorito é você quem escolhe.</p></div><div class="tracks"><button class="track portal" data-go="3"><span>01</span><b>BIG <i>ELVIS</i></b><svg viewBox="0 0 24 24"><path d="M4 12h16M13 5l7 7-7 7"/></svg></button><button class="track" data-go="4"><span>02</span><b>QUEEN TASTY</b><svg viewBox="0 0 24 24"><path d="M4 12h16M13 5l7 7-7 7"/></svg></button><button class="track" data-go="5"><span>03</span><b>ANGUS MARILYN</b><svg viewBox="0 0 24 24"><path d="M4 12h16M13 5l7 7-7 7"/></svg></button><button class="track" data-go="6"><span>04</span><b>BEATLE MELT</b><svg viewBox="0 0 24 24"><path d="M4 12h16M13 5l7 7-7 7"/></svg></button><p>Nomes do cardápio oficial da casa.</p></div></div></section>
-<section class="scene product" data-label="Big Elvis" data-theme="dark" data-transition="circle" aria-labelledby="s4"><div class="grid"><div class="copy"><p class="eyebrow">GRANDES HITS</p><h2 id="s4">BIG<br><em>ELVIS.</em></h2><p>Pão artesanal, burger bovino de 200 g recheado com muçarela, molho especial da casa, bacon crocante e anéis de cebola empanados.</p><div class="actions"><a class="button" href="https://senhorburgercontagem.menudino.com/" target="_blank" rel="noopener">Escolher no cardápio <svg viewBox="0 0 24 24"><path d="M4 12h16M13 5l7 7-7 7"/></svg></a></div></div><figure class="photo portal"><img src="https://files.menudino.com/merchants/c5fc4cce-2faf-11ee-9964-0022483864db/items/images/large/838dc945-9ee4-438e-ab78-6cbc0543679a_20250915223008.webp" alt="Big Elvis do cardápio oficial"></figure><span class="index">01</span></div></section>
-<section class="scene light product reverse" data-label="Queen Tasty" data-theme="light" data-transition="photo" aria-labelledby="s5"><div class="grid"><div class="copy"><p class="eyebrow">BURGER'S</p><h2 id="s5">QUEEN<br><em>TASTY.</em></h2><p>Pão artesanal, burger bovino de 150 g, muçarela, cebola roxa, salada, molho barbecue e bacon crocante.</p><div class="actions"><a class="button" href="https://senhorburgercontagem.menudino.com/" target="_blank" rel="noopener">Ver o cardápio <svg viewBox="0 0 24 24"><path d="M4 12h16M13 5l7 7-7 7"/></svg></a></div></div><figure class="photo portal"><img src="https://files.menudino.com/merchants/c5fc4cce-2faf-11ee-9964-0022483864db/items/images/large/37896a40-ff5b-45f0-a94a-1df1b797a7c4_20250915223004.webp" alt="Queen Tasty do cardápio oficial"></figure><span class="index">02</span></div></section>
-<section class="scene product" data-label="Angus Marilyn" data-theme="dark" data-transition="photo" aria-labelledby="s6"><div class="grid"><div class="copy"><p class="eyebrow">GRANDES HITS</p><h2 id="s6">ANGUS<br><em>MARILYN.</em></h2><p>Pão australiano artesanal, duplo burger bovino de 150 g, muçarela, cebola caramelizada, bacon crocante e cheddar cremoso da casa.</p><div class="actions"><a class="button" href="https://senhorburgercontagem.menudino.com/" target="_blank" rel="noopener">Ver o cardápio <svg viewBox="0 0 24 24"><path d="M4 12h16M13 5l7 7-7 7"/></svg></a></div></div><figure class="photo portal"><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkwTqlRyTqlYTZKrpkGOQGQIx2Mw0n-JPfboyIpMewucPZ9MtAIBp0gBJYU7WUI7O5qw4OcXKyyXmzygjZo5DPLjPPoZMS1ZAXVmIMfKjOH4xsQZgUZMjsbPzjpMY18vaHBB0Kflw=w1600-h1600-k-no" alt="Hambúrguer Angus registrado na Senhor Burger"></figure><span class="index">03</span></div></section>
-<section class="scene red product reverse" data-label="Beatle Melt" data-theme="red" data-transition="photo" aria-labelledby="s7"><div class="grid"><div class="copy"><p class="eyebrow">BURGER'S</p><h2 id="s7">BEATLE<br><em>MELT.</em></h2><p>Pão artesanal, burger de frango de 150 g, muçarela, cebola caramelizada, bacon crocante e requeijão cremoso.</p><div class="actions"><a class="button" href="https://senhorburgercontagem.menudino.com/" target="_blank" rel="noopener">Ver o cardápio <svg viewBox="0 0 24 24"><path d="M4 12h16M13 5l7 7-7 7"/></svg></a></div></div><figure class="photo portal"><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmLW4TNvyLFE8Wr5unANlDDxHX2pGZOkoYaiCh_xHUvM_gDBT56apRRllDUzRIUVh0d7hefGu7x4X6M7qpC20xOUm3B2Tjq1e8eQxvoLRl6MaYk9XCImiW72s1veOxbf834hfac=w1600-h1600-k-no" alt="Hambúrguer Beatle Melt registrado na Senhor Burger"></figure><span class="index">04</span></div></section>
-<section class="scene light product wedges" data-label="Batata rústica" data-theme="light" data-transition="circle" aria-labelledby="s8"><div class="grid"><figure class="photo portal"><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmLW4TNvyLFE8Wr5unANlDDxHX2pGZOkoYaiCh_xHUvM_gDBT56apRRllDUzRIUVh0d7hefGu7x4X6M7qpC20xOUm3B2Tjq1e8eQxvoLRl6MaYk9XCImiW72s1veOxbf834hfac=w1600-h1600-k-no" alt="Batata rústica com molho na Senhor Burger"><span></span></figure><div class="copy"><p class="eyebrow">MAIS UM MOTIVO PARA FICAR</p><h2 id="s8">A MELHOR<br><em>COMPANHIA.</em></h2><p>Batata rústica, molho e uma pausa entre uma mordida e outra.</p><div class="actions"><a class="button" href="https://senhorburgercontagem.menudino.com/" target="_blank" rel="noopener">Ver acompanhamentos <svg viewBox="0 0 24 24"><path d="M4 12h16M13 5l7 7-7 7"/></svg></a></div></div></div></section>
-<section class="scene product shake" data-label="O lado doce" data-theme="dark" data-transition="photo" aria-labelledby="s9"><div class="grid"><div class="copy"><p class="eyebrow">AGORA, O LADO DOCE</p><h2 id="s9">PEDE<br><em>UM BIS.</em></h2><p>Um milkshake para prolongar a conversa. Nas fotos da casa: Ovomaltine.</p><div class="actions"><a class="button" href="https://senhorburgercontagem.menudino.com/" target="_blank" rel="noopener">Ver milkshakes <svg viewBox="0 0 24 24"><path d="M4 12h16M13 5l7 7-7 7"/></svg></a></div></div><figure class="photo portal"><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWn5lpjxD8LoAcLExJJCtk6rbr1oI10N66EQnDfLgjJlw1o0yFrtEl6fJx7rVRdG25FZg6Xg6Y2SJGSuXS8jm2JZtrdy6nnUP7aPx-GY4hASgBKSRfMBNQhf2NTaeFRNhRN_ax4D=w1600-h1600-k-no" alt="Milkshake de Ovomaltine na mesa da Senhor Burger"></figure></div></section>
-<section class="scene red product reverse" data-label="Para os pequenos" data-theme="red" data-transition="color" aria-labelledby="s10"><div class="grid"><div class="copy"><p class="eyebrow">PARA OS PEQUENOS</p><h2 id="s10">PEQUENOS.<br><em>GRANDES FÃS.</em></h2><p>O Menu kids reúne hambúrguer infantil, batata e mini milkshake, conforme o cardápio oficial.</p><div class="actions"><a class="button" href="https://senhorburgercontagem.menudino.com/" target="_blank" rel="noopener">Conhecer o Menu kids <svg viewBox="0 0 24 24"><path d="M4 12h16M13 5l7 7-7 7"/></svg></a></div></div><figure class="photo portal"><img src="https://files.menudino.com/merchants/c5fc4cce-2faf-11ee-9964-0022483864db/items/images/large/f8d617c3-3770-4428-b24f-bd972a997c9d_20250915223023.webp" alt="Menu kids do cardápio oficial"></figure></div></section>
-<section class="scene house" data-label="Entre. Fique à vontade." data-theme="dark" data-transition="photo" aria-labelledby="s11"><figure class="photo portal"><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkUfQMgK7ldOsuVFQoPhaSmE4MP7BqpDl4rJlfywZDlbE5AD5p-IKRJ5RPqXDAhtYvq6BzvIR9nlOhvMTzPYhYofywiFZNUDb1YZJ_TTO-kCYyGDpi5RbDGShnofMkQ5CQysh_PWw=w1600-h1600-k-no" alt="Salão da Senhor Burger com mesas e logo na parede"></figure><div class="copy"><p class="eyebrow">RUA VP-1, 2454 · NOVA CONTAGEM</p><h2 id="s11">ENTRE.<br><em>FIQUE À VONTADE.</em></h2><p>A sua próxima mesa está em Nova Contagem.</p><div class="actions"><a class="button" href="https://www.google.com.br/maps/place/Senhor+Burger/@-19.8261594,-44.1462364,17z" target="_blank" rel="noopener">Como chegar <svg viewBox="0 0 24 24"><path d="M4 12h16M13 5l7 7-7 7"/></svg></a></div></div></section>
-<section class="scene light score" data-label="Quem veio, conta" data-theme="light" data-transition="word" aria-labelledby="s12"><div class="grid"><div class="copy"><p class="eyebrow">QUEM VEIO, CONTA</p><div class="score portal" id="s12">4,7 <small>/ 5</small></div><p class="stars" aria-label="Nota 4,7 de 5">★ ★ ★ ★ ★</p><p>1.276 avaliações no Google.<br><small>Registro consultado em setembro de 2026.</small></p><div class="actions"><a class="textlink" href="https://www.google.com.br/maps/place/Senhor+Burger/@-19.8261594,-44.1462364,17z" target="_blank" rel="noopener">Ler no Google</a></div></div><div class="score-side"><span>COMIDA.</span><span>ENCONTROS.</span><em>MEMÓRIAS.</em><p>Experiências que os clientes decidiram compartilhar.</p></div></div></section>
-<section class="scene reviews" data-label="Palavras de quem veio" data-theme="dark" data-transition="word" aria-labelledby="s13"><div class="inner"><p class="eyebrow">AVALIAÇÕES REAIS · GOOGLE</p><div class="quote">“</div><div class="review" id="review">O hambúrguer é incrível, muito saboroso, bem preparado e com ingredientes de qualidade.<cite>Alinne Gomes<small>Avaliação no Google</small></cite></div><div class="tabs"><button class="on" data-review="0">01</button><button data-review="1">02</button><button data-review="2">03</button></div></div></section>
-<section class="scene light visit" data-label="Nosso endereço" data-theme="light" data-transition="color" aria-labelledby="s14"><div class="grid"><div class="copy"><p class="eyebrow">MARQUE ESSE ENCONTRO</p><h2 id="s14">A GENTE<br>SE VÊ <em>AQUI.</em></h2><p>Rua VP-1, 2454<br><small>Nova Contagem · Contagem, MG · 32050-602</small></p><div class="actions"><a class="button" href="https://www.google.com.br/maps/place/Senhor+Burger/@-19.8261594,-44.1462364,17z" target="_blank" rel="noopener">Abrir rota <svg viewBox="0 0 24 24"><path d="M4 12h16M13 5l7 7-7 7"/></svg></a></div><a class="phone" href="tel:+5531975667577">(31) 97566-7577</a></div><div class="address portal"><span>CONTAGEM / MG</span><strong>VP–1</strong><strong>2454</strong><span>NOVA CONTAGEM</span></div></div></section>
-<section class="scene red closing" data-label="Agora é a sua vez" data-theme="red" data-transition="circle" aria-labelledby="s15"><div class="grid"><div class="copy"><p class="eyebrow">AGORA É A SUA VEZ</p><h2 id="s15">DEU<br><em>VONTADE?</em></h2><p>Escolha seu próximo favorito no cardápio da Senhor Burger.</p><div class="actions"><a class="button" href="https://senhorburgercontagem.menudino.com/" target="_blank" rel="noopener">Fazer meu pedido <svg viewBox="0 0 24 24"><path d="M4 12h16M13 5l7 7-7 7"/></svg></a><a class="textlink" href="https://wa.me/5531975667577" target="_blank" rel="noopener">WhatsApp</a></div><div class="socials"><a class="textlink" href="https://www.instagram.com/senhor_burger/" target="_blank" rel="noopener">Instagram</a><button class="textlink" data-go="0">Voltar ao começo</button></div></div><div class="closing-brand portal"><img src="https://ugc.production.linktr.ee/7rw0Ef7ATtuTsijSd46a_RI0Bxg70g480EakC?io=true&size=avatar-v3_0" alt="Logo Senhor Burger"></div></div></section>
+<main class="w-full">
+<!-- SECTION 02: HERO SECTION (Com background sutil de gastronomia e máscara degradê) -->
+<section class="relative max-w-full overflow-hidden" id="top"><div class="max-w-6xl mx-auto px-5 sm:px-8 pt-8 sm:pt-14 pb-12 sm:pb-20">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+    <div class="lg:col-span-5 flex flex-col justify-center order-2 lg:order-1">
+      <div class="inline-flex items-center gap-2 mb-4">
+        <span class="w-2.5 h-2.5 rounded-full bg-[#CF2934]"></span>
+        <span class="text-xs sm:text-sm font-bold tracking-widest text-[#6F625D] uppercase">
+          Hambúrguer Artesanal · Nova Contagem
+        </span>
+      </div>
+      <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl text-[#181311] mb-5 sm:mb-6 uppercase leading-none">
+        Um burger<br>
+        que ocupa<br>
+        <span class="text-[#CF2934]">a cena.</span>
+      </h1>
+      <p class="text-base sm:text-lg text-[#6F625D] max-w-lg font-normal leading-relaxed mb-6 sm:mb-8">
+        Hambúrguer artesanal, ambiente acolhedor e uma experiência elogiada por quem já sentou à mesa.
+      </p>
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 max-w-md">
+        <a class="inline-flex items-center justify-center bg-[#CF2934] text-white hover:bg-[#AD202A] font-bold text-base px-7 py-3.5 transition-colors duration-200 text-center min-h-[48px] w-full sm:w-auto rounded-[12px]" href="https://senhorburgercontagem.menudino.com" rel="noopener noreferrer" target="_blank">
+          Pedir agora
+        </a>
+        <a class="inline-flex items-center justify-center bg-transparent hover:bg-[#181311] hover:text-white text-[#181311] border-2 border-[#181311]/30 hover:border-[#181311] font-semibold text-base px-6 py-3.5 transition-colors duration-200 text-center min-h-[48px] w-full sm:w-auto rounded-[12px]" href="https://senhorburgercontagem.menudino.com" rel="noopener noreferrer" target="_blank">
+          Ver cardápio
+        </a>
+      </div>
+    </div>
+    <div class="lg:col-span-7 order-1 lg:order-2 flex justify-center items-center w-full">
+      <div class="relative w-full overflow-hidden rounded-[18px] border border-[#D7C9BC] bg-[#E7D8C8] h-[360px] sm:h-[480px] lg:h-[560px]">
+        <img alt="Senhor Burger Artesanal Protagonista" class="w-full h-full object-cover object-center" src="assets/images/senhor-burger/hero-main.webp" decoding="async" fetchpriority="high">
+        
+      </div>
+    </div>
+  </div>
+</div></section>
+<!-- SECTION 03: PRODUTOS / DESEJO (id='produtos') -->
+<section class="w-full border-t border-[#D7C9BC] bg-[#E7D8C8]/30" id="produtos"><div class="max-w-6xl mx-auto px-5 sm:px-8 py-12 sm:py-20">
+  <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-[#D7C9BC]">
+    <div>
+      <div class="inline-flex items-center gap-2 mb-2">
+        <span class="w-2 h-2 rounded-full bg-[#CF2934]"></span>
+        <p class="text-xs font-bold tracking-widest text-[#CF2934] uppercase">Cardápio em destaque</p>
+      </div>
+      <h2 class="font-display text-3xl sm:text-5xl text-[#181311] uppercase tracking-tight">ESCOLHA PELO DESEJO.</h2>
+    </div>
+    <p class="text-base text-[#6F625D] max-w-md font-normal leading-relaxed">Quatro caminhos diferentes para chegar ao mesmo problema: decidir qual pedir primeiro.</p>
+  </div>
+  <div class="pt-8 sm:pt-12 flex flex-col gap-8 sm:gap-10">
+    <!-- PRODUTO EM DESTAQUE: FAT FAMILY -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center bg-[#FFF8EE] rounded-[18px] border border-[#D7C9BC] p-6 sm:p-8">
+      <div class="lg:col-span-7 flex flex-col justify-center order-2 lg:order-1">
+        <h3 class="font-display text-2xl sm:text-4xl text-[#181311] uppercase mb-3 tracking-tight">FAT FAMILY</h3>
+        <p class="text-base sm:text-lg text-[#6F625D] leading-relaxed font-normal max-w-lg mb-4">Quatro smash burgers em uma construção feita para não passar despercebida.</p>
+        
+      </div>
+      <div class="lg:col-span-5 order-1 lg:order-2 w-full">
+        <div class="relative overflow-hidden rounded-[12px] border border-[#D7C9BC] bg-[#E7D8C8] h-[280px] sm:h-[340px] w-full">
+          <img alt="Fat Family — 4 Smash Burgers" class="w-full h-full object-cover object-center" src="assets/images/senhor-burger/fat-family.webp" decoding="async" loading="lazy">
+        </div>
+      </div>
+    </div>
+    <!-- GRID DOS DEMAIS PRODUTOS -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+      <!-- BIG ELVIS -->
+      <div class="flex flex-col bg-[#FFF8EE] rounded-[18px] border border-[#D7C9BC] p-5 sm:p-6">
+        <div class="relative overflow-hidden rounded-[12px] border border-[#D7C9BC] bg-[#E7D8C8] h-[200px] sm:h-[230px] w-full mb-4">
+          <img alt="Burger Big Elvis 200g" class="w-full h-full object-cover object-center" src="assets/images/senhor-burger/big-elvis.webp" decoding="async" loading="lazy">
+        </div>
+        <div class="flex flex-col flex-grow justify-between">
+          <div class="mb-3">
+            <h4 class="font-display text-xl text-[#181311] uppercase mb-2 tracking-tight">BIG ELVIS</h4>
+            <p class="text-sm text-[#6F625D] leading-relaxed font-normal">Um dos grandes hits da casa, com burger de 200 g e presença à altura do nome.</p>
+          </div>
+          <div class="pt-3 border-t border-[#D7C9BC]">
+            <span class="text-xs text-[#6F625D] font-medium">Burger artesanal 200 g</span>
+          </div>
+        </div>
+      </div>
+      <!-- SMASH JOPLIN -->
+      <div class="flex flex-col bg-[#FFF8EE] rounded-[18px] border border-[#D7C9BC] p-5 sm:p-6">
+        <div class="relative overflow-hidden rounded-[12px] border border-[#D7C9BC] bg-[#E7D8C8] h-[200px] sm:h-[230px] w-full mb-4">
+          <img alt="Smash Joplin Duplo Costela" class="w-full h-full object-cover object-center" src="assets/images/senhor-burger/smash-joplin.webp" decoding="async" loading="lazy">
+        </div>
+        <div class="flex flex-col flex-grow justify-between">
+          <div class="mb-3">
+            <h4 class="font-display text-xl text-[#181311] uppercase mb-2 tracking-tight">SMASH JOPLIN</h4>
+            <p class="text-sm text-[#6F625D] leading-relaxed font-normal">Duplo smash de costela, bacon crocante e queijo canastra em uma combinação de peso.</p>
+          </div>
+          <div class="pt-3 border-t border-[#D7C9BC]">
+            <span class="text-xs text-[#6F625D] font-medium">Costela &amp; Queijo canastra</span>
+          </div>
+        </div>
+      </div>
+      <!-- VEGGIE MARLEY -->
+      <div class="flex flex-col bg-[#FFF8EE] rounded-[18px] border border-[#D7C9BC] p-5 sm:p-6">
+        <div class="relative overflow-hidden rounded-[12px] border border-[#D7C9BC] bg-[#E7D8C8] h-[200px] sm:h-[230px] w-full mb-4">
+          <img alt="Veggie Marley Autoral 100% Vegetal" class="w-full h-full object-cover object-center" src="assets/images/senhor-burger/veggie-marley.webp" decoding="async" loading="lazy">
+        </div>
+        <div class="flex flex-col flex-grow justify-between">
+          <div class="mb-3">
+            <h4 class="font-display text-xl text-[#181311] uppercase mb-2 tracking-tight">VEGGIE MARLEY</h4>
+            <p class="text-sm text-[#6F625D] leading-relaxed font-normal">A opção vegana da seleção, com identidade própria — não uma adaptação do restante do cardápio.</p>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Ver cardápio completo -->
+  <div class="mt-10 sm:mt-12 pt-6 border-t border-[#D7C9BC] flex flex-col sm:flex-row items-start sm:items-baseline justify-between gap-3 sm:gap-4">
+    <span class="text-xs font-bold text-[#6F625D] uppercase tracking-widest">Cardápio completo disponível para pedidos e salão</span>
+    <a class="group inline-flex items-center gap-2 text-sm font-bold text-[#181311] hover:text-[#CF2934] transition-colors duration-200" href="https://senhorburgercontagem.menudino.com" rel="noopener noreferrer" target="_blank">
+      <span class="">Ver cardápio completo</span>
+      <span class="transition-transform duration-200 group-hover:translate-x-1">→</span>
+    </a>
+  </div>
+</div></section>
+<!-- SECTION 04: A CASA / EXPERIÊNCIA (id='acasa') (Com background de salão amplo + overlay editorial) -->
+<section class="relative w-full bg-[#F3EBDD] border-t border-[#D7C9BC]" id="acasa"><div class="max-w-6xl mx-auto px-5 sm:px-8 py-14 sm:py-20">
+  <div class="max-w-3xl mb-8 sm:mb-12">
+    <div class="inline-flex items-center gap-2 mb-3">
+      <span class="w-2 h-2 rounded-full bg-[#CF2934]"></span>
+      <p class="text-xs font-bold tracking-widest text-[#CF2934] uppercase">Ambiente &amp; Encontro</p>
+    </div>
+    <h2 class="font-display text-3xl sm:text-5xl lg:text-6xl text-[#181311] uppercase tracking-tight mb-4 sm:mb-5">
+      O burger chama.<br>A casa faz ficar.
+    </h2>
+    <p class="text-base sm:text-lg text-[#6F625D] font-normal leading-relaxed">
+      Nas avaliações, o ambiente aparece junto do produto como parte da experiência: aconchego, conforto, atendimento e momentos para reunir família e amigos.
+    </p>
+  </div>
+  <div class="relative w-full rounded-[18px] overflow-hidden border border-[#D7C9BC] mb-6 sm:mb-8">
+    <div class="relative w-full h-[280px] sm:h-[460px] lg:h-[520px] overflow-hidden bg-[#E7D8C8]">
+      <img alt="Ambiente acolhedor do Senhor Burger em Nova Contagem" class="w-full h-full object-cover object-center" src="assets/images/senhor-burger/a-casa.webp" decoding="async" loading="lazy">
+      <div class="absolute bottom-4 right-4 bg-[#FFF8EE]/95 border border-[#D7C9BC] py-1 px-3 rounded-[6px] pointer-events-none">
+        <span class="text-[10px] font-bold text-[#181311] uppercase tracking-wider">Salão · Experiência Presencial</span>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-5 sm:p-6 bg-[#FFF8EE] rounded-[12px] border border-[#D7C9BC]">
+    <div>
+      <h3 class="font-bold text-sm sm:text-base text-[#181311] uppercase tracking-wide">Venha viver a experiência presencial</h3>
+      <p class="text-xs sm:text-sm text-[#6F625D] mt-1">Ambiente preparado para receber você e sua família em Nova Contagem.</p>
+    </div>
+    <a class="inline-flex items-center justify-center bg-transparent hover:bg-[#181311] hover:text-white text-[#181311] border-2 border-[#181311]/30 hover:border-[#181311] font-bold text-sm px-6 py-3 transition-colors duration-200 whitespace-nowrap min-h-[44px] text-center w-full sm:w-auto rounded-[12px]" href="https://maps.google.com/?q=R.+VP-1,+2454,+Nova+Contagem,+Contagem+-+MG" rel="noopener noreferrer" target="_blank">
+      Como chegar
+    </a>
+  </div>
+</div></section>
+<!-- SECTION 05: REPUTAÇÃO / PROVA (id='avaliacoes') (Com Textura Pontilhada e cards interativos) -->
+<section class="relative w-full bg-[#E7D8C8]/30 border-t border-[#D7C9BC]" id="avaliacoes"><div class="max-w-6xl mx-auto px-5 sm:px-8 py-12 sm:py-20">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
+    <!-- Painel Nota Média -->
+    <div class="lg:col-span-5 flex flex-col">
+      <div class="inline-flex items-center gap-2 mb-3">
+        <span class="w-2 h-2 rounded-full bg-[#CF2934]"></span>
+        <p class="text-xs font-bold tracking-widest text-[#CF2934] uppercase">Avaliações &amp; Comunidade</p>
+      </div>
+      <h2 class="font-display text-3xl sm:text-5xl text-[#181311] uppercase tracking-tight mb-6 sm:mb-8">
+        Quem vem,<br>fala por nós.
+      </h2>
+      <div class="p-6 sm:p-8 bg-[#FFF8EE] rounded-[18px] border border-[#D7C9BC] flex flex-col">
+        <div class="flex items-baseline gap-3">
+          <span class="font-display text-6xl sm:text-7xl text-[#181311]">4,7</span>
+          <div class="flex flex-col">
+            <div class="flex items-center gap-1 text-[#CF2934] text-lg">
+              <span class="">★</span><span class="">★</span><span class="">★</span><span class="">★</span><span class="">★</span>
+            </div>
+            <span class="text-xs font-bold uppercase tracking-wider text-[#6F625D] mt-1">Nota média</span>
+          </div>
+        </div>
+        <p class="font-bold text-base sm:text-lg text-[#181311] mt-3">Avaliação no Google</p>
+        <div class="mt-6 pt-2 border-t border-[#D7C9BC]">
+          <a class="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#CF2934] hover:underline underline-offset-4 transition-colors duration-200" href="https://maps.google.com/?q=R.+VP-1,+2454,+Nova+Contagem,+Contagem+-+MG" rel="noopener noreferrer" target="_blank">
+            Ver avaliações no Google ↗
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- Testemunhos reais -->
+    <div class="lg:col-span-7 flex flex-col gap-4 sm:gap-6 lg:pt-8">
+      <div class="p-5 sm:p-8 bg-[#FFF8EE] rounded-[18px] border border-[#D7C9BC] relative">
+        <div class="flex items-center gap-1 text-[#CF2934] text-sm mb-3 sm:mb-4">
+          <span class="">★</span><span class="">★</span><span class="">★</span><span class="">★</span><span class="">★</span>
+        </div>
+        <blockquote class="text-base sm:text-lg text-[#181311] font-medium leading-relaxed mb-4 sm:mb-6">
+          “O hambúrguer é incrível, muito saboroso, bem preparado... e o atendimento foi excelente.”
+        </blockquote>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 pt-3 sm:pt-4 border-t border-[#D7C9BC]">
+          <span class="text-xs font-bold text-[#181311] uppercase tracking-wider">Alinne Gomes</span>
+          <span class="text-[11px] text-[#6F625D] font-medium">Google Avaliações</span>
+        </div>
+      </div>
+      <div class="p-5 sm:p-8 bg-[#FFF8EE] rounded-[18px] border border-[#D7C9BC] relative">
+        <div class="flex items-center gap-1 text-[#CF2934] text-sm mb-3 sm:mb-4">
+          <span class="">★</span><span class="">★</span><span class="">★</span><span class="">★</span><span class="">★</span>
+        </div>
+        <blockquote class="text-base sm:text-lg text-[#181311] font-medium leading-relaxed mb-4 sm:mb-6">
+          “O ambiente está lindo, aconchegante e muito confortável, perfeito para reunir a família.”
+        </blockquote>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 pt-3 sm:pt-4 border-t border-[#D7C9BC]">
+          <span class="text-xs font-bold text-[#181311] uppercase tracking-wider">Isaque Pride</span>
+          <span class="text-[11px] text-[#6F625D] font-medium">Google Avaliações</span>
+        </div>
+      </div>
+      <div class="p-5 sm:p-8 bg-[#FFF8EE] rounded-[18px] border border-[#D7C9BC] relative">
+        <div class="flex items-center gap-1 text-[#CF2934] text-sm mb-3 sm:mb-4">
+          <span class="">★</span><span class="">★</span><span class="">★</span><span class="">★</span><span class="">★</span>
+        </div>
+        <blockquote class="text-base sm:text-lg text-[#181311] font-medium leading-relaxed mb-4 sm:mb-6">
+          “Lugar muito agradável e aconchegante... um ótimo lugar pra levar a família.”
+        </blockquote>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 pt-3 sm:pt-4 border-t border-[#D7C9BC]">
+          <span class="text-xs font-bold text-[#181311] uppercase tracking-wider">Duda Games play Craft</span>
+          <span class="text-[11px] text-[#6F625D] font-medium">Google Avaliações</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+<!-- SECTION 06: LOCALIZAÇÃO (id='localizacao') -->
+<section class="w-full bg-[#F3EBDD] border-t border-[#D7C9BC]" id="localizacao"><div class="max-w-6xl mx-auto px-5 sm:px-8 py-14 sm:py-20">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+    <div class="lg:col-span-5 flex flex-col">
+      <div class="inline-flex items-center gap-2 mb-3">
+        <span class="w-2 h-2 rounded-full bg-[#CF2934]"></span>
+        <p class="text-xs font-bold tracking-widest text-[#CF2934] uppercase">Endereço &amp; Presença</p>
+      </div>
+      <h2 class="font-display text-3xl sm:text-5xl text-[#181311] uppercase tracking-tight mb-5 sm:mb-6">
+        Senhor Burger acontece aqui.
+      </h2>
+      <div class="p-5 sm:p-6 bg-[#FFF8EE] rounded-[18px] border border-[#D7C9BC] mb-6">
+        <p class="font-display text-2xl text-[#181311] uppercase mb-1">R. VP-1, 2454</p>
+        <p class="text-base font-semibold text-[#6F625D]">Nova Contagem · Contagem — MG</p>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3">
+        <a class="inline-flex items-center justify-center bg-[#CF2934] text-white hover:bg-[#AD202A] font-bold text-sm px-6 py-3.5 transition-colors duration-200 text-center min-h-[46px] rounded-[12px]" href="https://maps.google.com/?q=R.+VP-1,+2454,+Nova+Contagem,+Contagem+-+MG" rel="noopener noreferrer" target="_blank">
+          Como chegar (abrir no mapa)
+        </a>
+        <a class="inline-flex items-center justify-center bg-transparent hover:bg-[#181311] hover:text-white text-[#181311] border-2 border-[#181311]/30 hover:border-[#181311] font-semibold text-sm px-5 py-3.5 transition-colors duration-200 text-center min-h-[46px] rounded-[12px]" href="https://senhorburgercontagem.menudino.com" rel="noopener noreferrer" target="_blank">
+          Fazer pedido
+        </a>
+      </div>
+    </div>
+    <div class="lg:col-span-7 w-full">
+      <div class="w-full h-[280px] sm:h-[380px] rounded-[18px] border border-[#D7C9BC] bg-[#E7D8C8] overflow-hidden relative flex items-center justify-center">
+        <div class="relative z-10 bg-[#FFF8EE] border border-[#D7C9BC] p-5 sm:p-6 rounded-[12px] flex flex-col items-center text-center max-w-xs mx-4">
+          <div class="w-10 h-10 rounded-full bg-[#CF2934] text-white flex items-center justify-center font-bold mb-3">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+            </svg>
+          </div>
+          <p class="font-display text-base sm:text-lg text-[#181311] uppercase">SENHOR.BURGER</p>
+          <a class="mt-3 text-[11px] font-bold text-[#CF2934] hover:underline uppercase tracking-wider transition-colors" href="https://maps.google.com/?q=R.+VP-1,+2454,+Nova+Contagem,+Contagem+-+MG" rel="noopener noreferrer" target="_blank">
+            VER NO GOOGLE MAPS →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+<!-- SECTION 07: CONVERSÃO FINAL -->
+<section class="relative w-full bg-[#181311] text-[#FFF8EE] border-t border-[#D7C9BC] overflow-hidden" id="pedir"><div class="max-w-6xl mx-auto px-5 sm:px-8 py-14 sm:py-20">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+    <div class="lg:col-span-7 flex flex-col">
+      <div class="inline-flex items-center gap-2 mb-3">
+        <span class="w-2 h-2 rounded-full bg-[#CF2934]"></span>
+        <p class="text-xs font-bold tracking-widest text-[#CF2934] uppercase">Pronto para pedir?</p>
+      </div>
+      <h2 class="font-display text-4xl sm:text-6xl lg:text-7xl text-[#FFF8EE] uppercase tracking-tight mb-4 leading-none">
+        A fome já fez<br>a parte dela.
+      </h2>
+      <p class="text-base sm:text-xl text-[#FFF8EE]/80 font-normal mb-6 sm:mb-8 max-w-lg">
+        Escolha seu burger e faça seu pedido.
+      </p>
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 max-w-md">
+        <a class="inline-flex items-center justify-center bg-[#CF2934] text-white hover:bg-[#AD202A] font-bold text-base px-8 py-3.5 sm:py-4 transition-colors duration-200 text-center min-h-[48px] w-full sm:w-auto rounded-[12px]" href="https://senhorburgercontagem.menudino.com" rel="noopener noreferrer" target="_blank">
+          Pedir agora
+        </a>
+        <a class="inline-flex items-center justify-center bg-transparent hover:bg-white hover:text-[#181311] text-[#FFF8EE] border-2 border-[#FFF8EE]/40 hover:border-white font-semibold text-base px-7 py-3.5 sm:py-4 transition-colors duration-200 text-center min-h-[48px] w-full sm:w-auto rounded-[12px]" href="https://senhorburgercontagem.menudino.com" rel="noopener noreferrer" target="_blank">
+          Ver cardápio
+        </a>
+      </div>
+    </div>
+    <div class="lg:col-span-5 w-full">
+      <div class="relative w-full h-[240px] sm:h-[340px] rounded-[18px] overflow-hidden border border-white/20 bg-[#181311]">
+        <img alt="Burger Artesanal Pronto Para Pedir" class="w-full h-full object-cover object-center" src="assets/images/senhor-burger/cta-final.webp" decoding="async" loading="lazy">
+        <div class="absolute bottom-3 right-3 bg-[#181311]/90 border border-white/20 py-1 px-2.5 rounded-[6px] text-[10px] font-bold text-[#FFF8EE] uppercase tracking-wider pointer-events-none">
+          Senhor Burger · Takeaway &amp; Salão
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
 </main>
-<div id="wipe" class="wipe" aria-hidden="true"><img alt=""><b></b></div>
-<footer class="footer"><div class="counter"><span id="num">01</span><span>/</span><span>15</span><b id="label">Um senhor burger</b></div><div class="progress" role="group" aria-label="Escolher faixa"></div><div class="controls"><button class="prev" id="prev" disabled aria-label="Faixa anterior"><svg viewBox="0 0 24 24"><path d="M4 12h16M13 5l7 7-7 7"/></svg></button><button class="next" id="next" aria-label="Próxima faixa"><span>Próxima</span><svg viewBox="0 0 24 24"><path d="M4 12h16M13 5l7 7-7 7"/></svg></button></div></footer>
-<dialog id="index"><div class="dialoghead"><h2>ESCOLHA A<br><em>PRÓXIMA FAIXA.</em></h2><button class="close" aria-label="Fechar">×</button></div><div class="chapters"></div><p class="dialognote">Uma noite. Quinze faixas. Senhor Burger.</p></dialog>
-<script>
-(function(){
-'use strict';
-var sections=[].slice.call(document.querySelectorAll('.scene')),labels=sections.map(function(s){return s.dataset.label}),current=0,busy=false;
-var wipe=document.getElementById('wipe'),wimg=wipe.querySelector('img'),wword=wipe.querySelector('b'),app=document.getElementById('app'),progress=document.querySelector('.progress');
-var arrow='<svg viewBox="0 0 24 24"><path d="M4 12h16M13 5l7 7-7 7"/></svg>';
-progress.innerHTML=labels.map(function(label,i){return '<button data-go="'+i+'" aria-label="Faixa '+(i+1)+': '+label+'"><i></i></button>';}).join('');
-document.querySelector('.chapters').innerHTML=labels.map(function(label,i){return '<button class="chapter" data-go="'+i+'"><small>'+String(i+1).padStart(2,'0')+'</small>'+label+arrow+'</button>';}).join('');
-function portal(s){return s.querySelector('.portal')||s.querySelector('h1,h2')}
-function point(el){var r=el.getBoundingClientRect();return{x:r.left+r.width/2,y:r.top+r.height/2}}
-function circle(r,p){return 'circle('+r+'px at '+p.x+'px '+p.y+'px)'}
-function inset(el){var r=el.getBoundingClientRect();return 'inset('+Math.max(0,r.top)+'px '+Math.max(0,innerWidth-r.right)+'px '+Math.max(0,innerHeight-r.bottom)+'px '+Math.max(0,r.left)+'px)'}
-function setState(i,history){sections.forEach(function(s,n){s.classList.toggle('active',n===i);s.classList.remove('incoming');s.setAttribute('aria-hidden',n===i?'false':'true')});current=i;app.dataset.theme=sections[i].dataset.theme;document.body.style.setProperty('--fg',sections[i].dataset.theme==='light'?'#130f0f':'#f3f3f3');document.getElementById('num').textContent=String(i+1).padStart(2,'0');document.getElementById('label').textContent=labels[i];document.getElementById('prev').disabled=i===0;document.getElementById('next').querySelector('span').textContent=i===14?'Recomeçar':'Próxima';[].slice.call(progress.children).forEach(function(b,n){b.classList.toggle('on',n===i)});if(history)history.pushState({i:i},'',location.pathname+'#'+sections[i].id)}
-function reveal(s,dir){[].slice.call(s.querySelectorAll('.copy,.photo,.brandmark,.tracks,.score-side,.review,.address,.closing-brand')).forEach(function(el,i){el.animate([{opacity:0,transform:'translateX('+(dir*20)+'px)'},{opacity:1,transform:'translateX(0)'}],{duration:620,delay:i*34,easing:'cubic-bezier(.16,1,.3,1)',fill:'both'})})}
-function full(){return circle(Math.hypot(innerWidth,innerHeight)+10,{x:innerWidth/2,y:innerHeight/2})}
-function go(to,history){if(busy||to<0||to>14||to===current)return;busy=true;var from=sections[current],dest=sections[to],dir=to>current?1:-1,type=from.dataset.transition||'circle',origin=point(portal(from)),target=point(portal(dest)),radius=Math.hypot(innerWidth,innerHeight)+10;dest.classList.add('incoming');wipe.classList.add('show');wipe.style.background=type==='color'?(dest.classList.contains('light')?'#f3f3f3':'#b91818'):'#b91818';wimg.style.opacity=0;wword.style.opacity=0;
-var cover=type==='word'?circle(0,origin):type==='photo'?inset(portal(from)):circle(0,origin);wipe.style.clipPath=cover;
-var first=wipe.animate([{clipPath:cover},{clipPath:full()}],{duration:690,easing:'cubic-bezier(.76,0,.24,1)',fill:'forwards'});
-if(type==='photo'){var im=from.querySelector('img');if(im){wimg.src=im.currentSrc||im.src;wimg.style.opacity=.38;wimg.animate([{opacity:.38},{opacity:.05}],{duration:690,fill:'forwards'})}}else if(type==='word'){wword.textContent=from.id==='repertorio'?'ELVIS':from.id==='avaliacoes'?'4,7':'VEM.';wword.animate([{opacity:0,transform:'scale(.6)'},{opacity:1,offset:.5},{opacity:0,transform:'scale(1.8)'}],{duration:690,easing:'cubic-bezier(.76,0,.24,1)',fill:'forwards'})}
-first.finished.then(function(){setState(to,history!==false);var rev=reveal(dest,dir);wipe.style.clipPath=full();if(type==='photo'){var targetImg=dest.querySelector('img');if(targetImg){wimg.src=targetImg.currentSrc||targetImg.src;wimg.style.opacity=1;wimg.animate([{opacity:.15},{opacity:1},{opacity:0}],{duration:760,easing:'cubic-bezier(.16,1,.3,1)',fill:'forwards'})}}return wipe.animate([{clipPath:full()},{clipPath:circle(0,target)}],{duration:760,easing:'cubic-bezier(.16,1,.3,1)',fill:'forwards'}).finished.then(function(){return rev})}).catch(function(e){console.error(e);setState(to,history!==false)}).finally(function(){setTimeout(function(){wipe.classList.remove('show');wipe.style.clipPath='';wimg.style.opacity=0;wword.style.opacity=0;dest.classList.remove('incoming');busy=false},40)})}
-document.addEventListener('click',function(e){var b=e.target.closest('[data-go]');if(b){var n=Number(b.dataset.go);if(!Number.isNaN(n))go(n)}});document.getElementById('next').onclick=function(){go((current+1)%15)};document.getElementById('prev').onclick=function(){go(current-1)};
-document.addEventListener('keydown',function(e){if(document.getElementById('index').open)return;if(['ArrowRight','ArrowDown','PageDown'].indexOf(e.key)>=0){e.preventDefault();go(Math.min(14,current+1))}if(['ArrowLeft','ArrowUp','PageUp'].indexOf(e.key)>=0){e.preventDefault();go(Math.max(0,current-1))}if(e.key==='Home'){e.preventDefault();go(0)}if(e.key==='End'){e.preventDefault();go(14)}});var sx=0;document.getElementById('stage').addEventListener('touchstart',function(e){if(e.touches.length===1)sx=e.touches[0].clientX},{passive:true});document.getElementById('stage').addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>60)go(current+(dx<0?1:-1))},{passive:true});
-var dlg=document.getElementById('index');document.getElementById('open-index').onclick=function(){dlg.showModal()};document.querySelector('.close').onclick=function(){dlg.close()};window.addEventListener('popstate',function(){var i=sections.findIndex(function(s){return '#'+s.id===location.hash});if(i>=0&&!busy)go(i,false)});
-document.querySelectorAll('[data-review]').forEach(function(){});
-var reviewText=[['O hambúrguer é incrível, muito saboroso, bem preparado e com ingredientes de qualidade.','Alinne Gomes'],['O espaço foi reformado e ficou simplesmente incrível. Ambiente lindo, aconchegante e muito confortável.','Isaque Pride'],['Lugar muito agradável e aconchegante, a comida é excepcional.','Duda Games play Craft']];
-document.querySelectorAll('[data-review]').forEach(function(b){b.onclick=function(){var r=reviewText[Number(b.dataset.review)],el=document.getElementById('review');el.innerHTML=r[0]+'<cite>'+r[1]+'<small>Avaliação no Google</small></cite>';document.querySelectorAll('.tabs button').forEach(function(x){x.classList.toggle('on',x===b)})}});
-var initial=sections.findIndex(function(s){return '#'+s.id===location.hash});setState(initial>=0?initial:0,false);reveal(sections[current],1);
-})();
-</script>
-</body>
-</html>
+<!-- SECTION 08: FOOTER -->
+<footer class="w-full bg-[#F3EBDD] border-t border-[#D7C9BC]"><div class="max-w-6xl mx-auto px-5 sm:px-8 py-12 sm:py-16">
+  <!-- Top Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-[#D7C9BC]">
+    <!-- Brand Identity & Address -->
+    <div class="md:col-span-5 flex flex-col space-y-3">
+      <a class="flex items-center gap-3 group focus-visible:ring-2 focus-visible:ring-[#1457D9] rounded-[6px]" data-asset="brand-logo" href="#top">
+        <img alt="Senhor Burger Logo Oficial" class="w-12 h-12 rounded-full object-cover group-hover:scale-105 transition-transform duration-300" src="assets/images/senhor-burger/logo-senhor-burger.webp" decoding="async">
+        <div>
+          <span class="font-display text-2xl text-[#181311] tracking-tight block leading-tight group-hover:text-[#CF2934] transition-colors duration-300">SENHOR<span class="text-[#CF2934]">.</span>BURGER</span>
+          <span class="text-[10px] font-bold uppercase tracking-widest text-[#CF2934]">Hamburgueria Artesanal</span>
+        </div>
+      </a>
+      <p class="text-sm font-semibold text-[#181311]">Hamburgueria Artesanal</p>
+      <p class="text-sm text-[#6F625D] leading-relaxed">R. VP-1, 2454 · Nova Contagem, Contagem — MG</p>
+      <p class="text-sm text-[#181311] font-medium pt-1">Telefone: <a class="hover:text-[#CF2934] transition-colors underline-offset-2 hover:underline" href="tel:+5531975667577">(31) 97566-7577</a></p>
+    </div>
+    <!-- Navigation Column -->
+    <div class="md:col-span-4 flex flex-col space-y-2">
+      <span class="text-xs font-bold uppercase tracking-widest text-[#181311] mb-1">
+        Navegação
+      </span>
+      <div class="grid grid-cols-2 gap-2 text-sm text-[#6F625D]">
+        <a class="hover:text-[#CF2934] transition-colors duration-200" href="#produtos">Produtos</a>
+        <a class="hover:text-[#CF2934] transition-colors duration-200" href="https://senhorburgercontagem.menudino.com" rel="noopener noreferrer" target="_blank">Pedido Online</a>
+        <a class="hover:text-[#CF2934] transition-colors duration-200" href="#acasa">A Casa</a>
+        <a class="hover:text-[#CF2934] transition-colors duration-200" href="https://senhorburgercontagem.menudino.com" rel="noopener noreferrer" target="_blank">Cardápio</a>
+        <a class="hover:text-[#CF2934] transition-colors duration-200" href="#avaliacoes">Avaliações</a>
+        <a class="hover:text-[#CF2934] transition-colors duration-200" href="#localizacao">Localização</a>
+      </div>
+    </div>
+    <!-- Connection Column -->
+    <div class="md:col-span-3 flex flex-col space-y-2">
+      <span class="text-xs font-bold uppercase tracking-widest text-[#181311] mb-1">Conexão</span>
+      <ul class="text-sm space-y-2 text-[#6F625D]">
+        <li class=""><a class="hover:text-[#CF2934] transition-colors font-medium inline-block duration-200" href="https://instagram.com/senhor_burger" rel="noopener noreferrer" target="_blank">Instagram (@senhor_burger)</a></li>
+        <li class=""><a class="hover:text-[#CF2934] transition-colors font-medium inline-block duration-200" href="tel:+5531975667577">Telefone / Pedidos: (31) 97566-7577</a></li>
+      </ul>
+    </div>
+  </div>
+  <!-- Bottom Disclaimer / Legal Oficial -->
+  <div class="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-[#6F625D]">
+    <p class="">Imagens ilustrativas. Cardápio, preços e horários atualizados: consulte o MenuDino e os canais oficiais do Senhor Burger.</p>
+    <p class="font-medium text-[#181311]/70 whitespace-nowrap">
+      Nova Contagem · Contagem — MG
+    </p>
+  </div>
+</div></footer>
+
+
+
+
+</body></html>
