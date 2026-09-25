@@ -1,0 +1,247 @@
+name: Final production hardening
+
+on:
+  push:
+    branches:
+      - stitch-final-2026-09-24
+    paths:
+      - '.github/workflows/final-production-hardening.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  harden:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout final branch
+        uses: actions/checkout@v4
+        with:
+          ref: stitch-final-2026-09-24
+
+      - name: Apply production corrections
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          import re
+
+          path = Path('index.html')
+          html = path.read_text(encoding='utf-8')
+
+          # 1) Production SEO metadata without inventing a final public domain.
+          if 'name="description"' not in html:
+              seo = '''
+<meta name="description" content="Senhor Burger em Nova Contagem, Contagem — hambúrguer artesanal, ambiente acolhedor, salão, retirada e pedidos online pelo MenuDino."/>
+<meta name="robots" content="index, follow"/>
+<meta name="theme-color" content="#CF2934"/>
+<meta property="og:locale" content="pt_BR"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Senhor Burger — Hamburgueria Artesanal em Nova Contagem"/>
+<meta property="og:description" content="Hambúrguer artesanal, ambiente acolhedor e pedidos online em Nova Contagem, Contagem — MG."/>
+<link rel="icon" href="assets/images/senhor-burger/logo-senhor-burger.webp" type="image/webp"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Senhor Burger",
+  "telephone": "+55 31 97566-7577",
+  "servesCuisine": "Hambúrguer artesanal",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "R. VP-1, 2454",
+    "addressLocality": "Contagem",
+    "addressRegion": "MG",
+    "addressCountry": "BR"
+  },
+  "hasMenu": "https://senhorburgercontagem.menudino.com",
+  "sameAs": ["https://instagram.com/senhor_burger"]
+}
+</script>'''
+              html = html.replace('<title>Senhor Burger — Hamburgueria Artesanal em Nova Contagem</title>', '<title>Senhor Burger — Hamburgueria Artesanal em Nova Contagem</title>' + seo, 1)
+
+          # 2) Align Stitch drift back to DESIGN.md semantic tokens.
+          color_map = {
+              '#FAF6EE': '#F3EBDD',
+              '#F3ECE0': '#FFF8EE',
+              '#EFE7D8': '#E7D8C8',
+              '#cf2934': '#CF2934',
+              '#ab041f': '#AD202A',
+              '#1C1917': '#181311',
+              '#78716C': '#6F625D',
+              '#E7DFD3': '#D7C9BC',
+              '#fff8f6': '#FFF8EE',
+              '#f7ebe7': '#F3EBDD',
+              '#fdf1ed': '#FFF8EE',
+              '#f1e6e2': '#E7D8C8',
+              '#ece0dc': '#D7C9BC',
+              '#201a18': '#181311',
+              '#5b403e': '#6F625D',
+              '#8f6f6d': '#6F625D',
+              '#e4bebb': '#D7C9BC',
+          }
+          for old, new in color_map.items():
+              html = html.replace(old, new)
+
+          old_radius = '''borderRadius: {
+          DEFAULT: "0.125rem",
+          lg: "0.25rem",
+          xl: "0.5rem",
+          full: "0.75rem"
+        }'''
+          new_radius = '''borderRadius: {
+          DEFAULT: "6px",
+          lg: "12px",
+          xl: "18px",
+          "2xl": "18px",
+          full: "9999px"
+        }'''
+          if old_radius not in html:
+              raise RuntimeError('Expected Stitch radius block not found')
+          html = html.replace(old_radius, new_radius, 1)
+
+          # 3) Remove visual effects explicitly prohibited by the approved DESIGN.md.
+          html = re.sub(
+              r'\n\s*/\* Microinteração Shimmer nos Botões \*/.*?(?=\n\s*/\* Textura Pontilhada Elegante \*/)',
+              '\n',
+              html,
+              flags=re.S,
+          )
+
+          def clean_classes(match):
+              classes = match.group(1).split()
+              cleaned = []
+              for token in classes:
+                  if token in {'btn-shimmer', 'btn-glow', 'backdrop-blur-md', 'animate-pulse', 'animate-ping', 'animate-bounce'}:
+                      continue
+                  if token.startswith('shadow-') or token.startswith('hover:shadow-'):
+                      continue
+                  cleaned.append(token)
+              return 'class="' + ' '.join(cleaned) + '"'
+
+          html = re.sub(r'class="([^"]*)"', clean_classes, html)
+
+          # 4) Accessible focus and reduced-motion behavior.
+          a11y_css = '''
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid #1457D9 !important;
+      outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto !important; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+'''
+          if 'prefers-reduced-motion' not in html:
+              html = html.replace('  </style>', a11y_css + '  </style>', 1)
+
+          html = html.replace('<nav class="hidden md:flex items-center gap-8 text-sm font-medium text-brand-charcoal/80">', '<nav aria-label="Navegação principal" class="hidden md:flex items-center gap-8 text-sm font-medium text-brand-charcoal/80">', 1)
+
+          # 5) Factuality: remove an exact review count that could not be revalidated for publication.
+          html = html.replace('1.279 avaliações no Google', 'Avaliação no Google')
+          html = html.replace('>Mais pedidos<', '>Destaques do cardápio<')
+
+          # 6) Replace prototype disclaimer with production-safe, authenticity-aware copy.
+          html = html.replace(
+              'Imagens e referências visuais em fase de homologação de protótipo. Cardápio, preços e horários serão divulgados exclusivamente pelos canais oficiais do Senhor Burger.',
+              'Imagens ilustrativas. Cardápio, preços e horários atualizados: consulte o MenuDino e os canais oficiais do Senhor Burger.'
+          )
+
+          # 7) Avoid duplicating the final CTA burger as both background and foreground.
+          html = re.sub(
+              r'<img alt="Chapa e brasas artesanais"[^>]*src="assets/images/senhor-burger/cta-final\.webp"\s*/>',
+              '',
+              html,
+              count=1,
+          )
+
+          # 8) Image decoding/loading: keep logo + hero eager; lazy-load below-fold imagery.
+          def image_attrs(match):
+              tag = match.group(0)
+              if 'decoding=' not in tag:
+                  tag = tag[:-2] + ' decoding="async"/>' if tag.endswith('/>') else tag
+              src = re.search(r'src="([^"]+)"', tag)
+              if src and ('logo-senhor-burger.webp' not in src.group(1)) and ('hero-main.webp' not in src.group(1)) and 'loading=' not in tag:
+                  tag = tag[:-2] + ' loading="lazy"/>' if tag.endswith('/>') else tag
+              return tag
+          html = re.sub(r'<img\b[^>]*?/>', image_attrs, html)
+
+          # 9) Internal assertions before committing.
+          required = [
+              'https://senhorburgercontagem.menudino.com',
+              'name="description"',
+              'application/ld+json',
+              'prefers-reduced-motion',
+              '#1457D9',
+              '#F3EBDD', '#FFF8EE', '#E7D8C8', '#CF2934', '#AD202A', '#181311', '#6F625D', '#D7C9BC',
+              'Imagens ilustrativas.',
+              'Avaliação no Google',
+          ]
+          for needle in required:
+              if needle not in html:
+                  raise RuntimeError(f'Missing required production marker: {needle}')
+
+          forbidden = [
+              '1.279 avaliações no Google',
+              'fase de homologação de protótipo',
+              'btn-shimmer', 'btn-glow',
+              'animate-pulse', 'animate-ping', 'animate-bounce',
+              'backdrop-blur-md',
+              '#FAF6EE', '#F3ECE0', '#EFE7D8', '#ab041f', '#1C1917', '#78716C', '#E7DFD3',
+              'href="#pedir"',
+              'lh3.googleusercontent.com',
+              'app.menudino.com',
+              'utm_source=chatgpt.com',
+              'WhatsApp / Pedidos',
+          ]
+          for needle in forbidden:
+              if needle in html:
+                  raise RuntimeError(f'Forbidden production marker still present: {needle}')
+
+          local_images = set(re.findall(r'src="(assets/images/senhor-burger/[^"]+)"', html))
+          missing = [p for p in sorted(local_images) if not Path(p).exists()]
+          if missing:
+              raise RuntimeError(f'Missing local images: {missing}')
+
+          path.write_text(html, encoding='utf-8')
+          print(f'Production hardening complete: {len(html)} chars, {len(local_images)} local image assets referenced')
+          PY
+
+      - name: Validate local image files
+        shell: bash
+        run: |
+          python3 -m pip install --quiet pillow
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import re
+
+          html = Path('index.html').read_text(encoding='utf-8')
+          paths = sorted(set(re.findall(r'src="(assets/images/senhor-burger/[^"]+)"', html)))
+          for item in paths:
+              p = Path(item)
+              with Image.open(p) as im:
+                  im.verify()
+              with Image.open(p) as im:
+                  if im.format != 'WEBP':
+                      raise RuntimeError(f'{item}: expected WEBP, got {im.format}')
+                  print(f'{item}: {im.format} {im.size} {p.stat().st_size} bytes')
+          PY
+
+      - name: Commit hardened production HTML
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git commit -m 'Harden final site for production'
+          git push origin HEAD:stitch-final-2026-09-24
