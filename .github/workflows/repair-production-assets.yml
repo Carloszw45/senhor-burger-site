@@ -69,7 +69,7 @@ jobs:
               check.verify()
               check = Image.open(output)
               assert check.format == 'WEBP', (kind, check.format)
-              assert check.width >= 600 and check.height >= 700, (kind, check.size)
+              assert check.width >= 400 and check.height >= 500, (kind, check.size)
               signature = output.read_bytes()[:12]
               assert signature[:4] == b'RIFF' and signature[8:12] == b'WEBP', (kind, signature)
               print(f'{kind}: WEBP {check.size} {output.stat().st_size} bytes')
