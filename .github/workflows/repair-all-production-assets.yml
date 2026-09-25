@@ -1,4 +1,4 @@
-name: Repair all production assets
+name: Diagnose production assets
 
 on:
   push:
@@ -7,11 +7,8 @@ on:
     paths:
       - '.github/workflows/repair-all-production-assets.yml'
 
-permissions:
-  contents: write
-
 jobs:
-  repair:
+  diagnose:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout final branch
@@ -19,91 +16,30 @@ jobs:
         with:
           ref: stitch-final-2026-09-24
 
-      - name: Rebuild approved local WebP assets
+      - name: Validate every WebP independently
         shell: bash
         run: |
           python3 -m pip install --quiet pillow
           python3 - <<'PY'
           from pathlib import Path
           from PIL import Image
-          from io import BytesIO
           import hashlib
-          import re
-          import urllib.request
 
-          source_html_url = 'https://raw.githubusercontent.com/Carloszw45/senhor-burger-site/6d4615804ba3cbfef22f1394b67c1f5004b35707/index.html'
-          with urllib.request.urlopen(source_html_url, timeout=30) as response:
-              source_html = response.read().decode('utf-8')
+          failures = []
+          for p in sorted(Path('assets/images/senhor-burger').glob('*.webp')):
+              sig = p.read_bytes()[:12]
+              digest = hashlib.sha256(p.read_bytes()).hexdigest()[:12]
+              try:
+                  with Image.open(p) as im:
+                      size = im.size
+                      fmt = im.format
+                      im.verify()
+                  print(f'PASS {p.name}: {fmt} {size} {p.stat().st_size} bytes sha={digest} sig={sig!r}')
+              except Exception as exc:
+                  failures.append((p.name, repr(exc)))
+                  print(f'FAIL {p.name}: {p.stat().st_size} bytes sha={digest} sig={sig!r} error={exc!r}')
 
-          tags = re.findall(r'<img\b[^>]*?/?>', source_html, flags=re.I)
-
-          def src_for_asset(asset_id):
-              marker = f'data-asset="{asset_id}"'
-              for tag in tags:
-                  if marker not in tag:
-                      continue
-                  match = re.search(r'\ssrc="(https?://[^"]+)"', tag, flags=re.I)
-                  if match:
-                      return match.group(1)
-              raise RuntimeError(f'External source not found for {asset_id}')
-
-          targets = {
-              'brand-logo': Path('assets/images/senhor-burger/logo-senhor-burger.webp'),
-              'hero-main': Path('assets/images/senhor-burger/hero-main.webp'),
-              'product-fat-family': Path('assets/images/senhor-burger/fat-family.webp'),
-              'product-big-elvis': Path('assets/images/senhor-burger/big-elvis.webp'),
-              'product-smash-joplin': Path('assets/images/senhor-burger/smash-joplin.webp'),
-              'product-veggie-marley': Path('assets/images/senhor-burger/veggie-marley.webp'),
-              'environment-main': Path('assets/images/senhor-burger/a-casa.webp'),
-          }
-
-          for asset_id, output in targets.items():
-              url = src_for_asset(asset_id)
-              req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-              with urllib.request.urlopen(req, timeout=60) as response:
-                  data = response.read()
-              image = Image.open(BytesIO(data))
-              if image.mode in ('RGBA', 'LA'):
-                  converted = image.convert('RGBA')
-              else:
-                  converted = image.convert('RGB')
-              converted.thumbnail((900, 1100), Image.Resampling.LANCZOS)
-              output.parent.mkdir(parents=True, exist_ok=True)
-              converted.save(output, 'WEBP', quality=82, method=6)
-              with Image.open(output) as check:
-                  check.verify()
-              with Image.open(output) as check:
-                  if check.format != 'WEBP':
-                      raise RuntimeError(f'{asset_id}: expected WEBP, got {check.format}')
-                  print(f'{asset_id}: WEBP {check.size} {output.stat().st_size} bytes')
-
-          # CTA final was replaced separately from the approved local source; preserve it.
-          all_assets = sorted(Path('assets/images/senhor-burger').glob('*.webp'))
-          if len(all_assets) < 8:
-              raise RuntimeError(f'Expected at least 8 production WebPs, found {len(all_assets)}')
-
-          hashes = {}
-          for output in all_assets:
-              with Image.open(output) as check:
-                  check.verify()
-              with Image.open(output) as check:
-                  if check.format != 'WEBP':
-                      raise RuntimeError(f'{output}: expected WEBP, got {check.format}')
-              digest = hashlib.sha256(output.read_bytes()).hexdigest()
-              hashes[output.name] = digest
-              print(f'VALID {output.name}: {output.stat().st_size} bytes sha256={digest[:12]}')
-
-          product_names = ['fat-family.webp', 'big-elvis.webp', 'smash-joplin.webp', 'veggie-marley.webp', 'cta-final.webp']
-          product_hashes = [hashes[name] for name in product_names]
-          if len(set(product_hashes)) != len(product_hashes):
-              raise RuntimeError('Duplicate product/CTA image detected after repair')
+          if failures:
+              print('INVALID_ASSETS=' + repr(failures))
+              raise SystemExit(1)
           PY
-
-      - name: Commit repaired assets
-        shell: bash
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/images/senhor-burger/*.webp
-          git commit -m 'Rebuild and validate all production image assets'
-          git push origin HEAD:stitch-final-2026-09-24
