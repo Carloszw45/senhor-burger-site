@@ -1,0 +1,94 @@
+name: Localize Stitch image assets
+
+on:
+  push:
+    branches:
+      - stitch-final-2026-09-24
+    paths:
+      - '.github/workflows/localize-stitch-assets.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  localize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout final branch
+        uses: actions/checkout@v4
+        with:
+          ref: stitch-final-2026-09-24
+
+      - name: Replace temporary Stitch image URLs with local assets
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path('index.html')
+          html = path.read_text(encoding='utf-8')
+
+          def local_src(tag: str) -> str | None:
+              alt_match = re.search(r'alt="([^"]*)"', tag)
+              asset_match = re.search(r'data-asset="([^"]*)"', tag)
+              alt = (alt_match.group(1) if alt_match else '').lower()
+              asset = (asset_match.group(1) if asset_match else '').lower()
+
+              if 'brand-logo' in asset or 'senhor burger logo' in alt:
+                  return 'assets/images/senhor-burger/logo-senhor-burger.webp'
+              if 'fat-family' in asset or 'fat family' in alt:
+                  return 'assets/images/senhor-burger/fat-family.webp'
+              if 'big-elvis' in asset or 'big elvis' in alt:
+                  return 'assets/images/senhor-burger/big-elvis.webp'
+              if 'smash-joplin' in asset or 'smash joplin' in alt:
+                  return 'assets/images/senhor-burger/smash-joplin.webp'
+              if 'veggie-marley' in asset or 'veggie marley' in alt:
+                  return 'assets/images/senhor-burger/veggie-marley.webp'
+              if 'environment' in asset or 'ambiente da hamburgueria' in alt or 'ambiente acolhedor' in alt:
+                  return 'assets/images/senhor-burger/a-casa.webp'
+              if 'final-' in asset or 'chapa e brasas' in alt or 'pronto para pedir' in alt:
+                  return 'assets/images/senhor-burger/cta-final.webp'
+              if 'hero' in asset or 'hamburgueria artesanal' in alt or 'burger artesanal senhor burger' in alt or 'senhor burger artesanal protagonista' in alt:
+                  return 'assets/images/senhor-burger/hero-main.webp'
+              return None
+
+          replacements = 0
+
+          def replace_img(match):
+              global replacements
+              tag = match.group(0)
+              target = local_src(tag)
+              if not target:
+                  return tag
+              if not re.search(r'\ssrc="[^"]*"', tag):
+                  return tag
+              new_tag = re.sub(r'\ssrc="[^"]*"', f' src="{target}"', tag, count=1)
+              if new_tag != tag:
+                  replacements += 1
+              return new_tag
+
+          html = re.sub(r'<img\b[^>]*?/?>', replace_img, html)
+          path.write_text(html, encoding='utf-8')
+
+          remaining = re.findall(r'<img\b[^>]*?\ssrc="https?://[^"]+"[^>]*?/?>', html)
+          print(f'Replaced image references: {replacements}')
+          print(f'Remaining external image references: {len(remaining)}')
+          if remaining:
+              for item in remaining:
+                  print(item)
+              raise SystemExit('External image references remain in index.html')
+          PY
+
+      - name: Commit localized image references
+        shell: bash
+        run: |
+          if git diff --quiet -- index.html; then
+            echo 'No index.html changes required.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git commit -m 'Use local production image assets'
+          git push origin HEAD:stitch-final-2026-09-24
