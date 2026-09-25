@@ -39,11 +39,12 @@ jobs:
           def external_src_for(kind):
               for tag in tags:
                   lower = tag.lower()
-                  match = False
                   if kind == 'fat-family':
                       match = 'product-fat-family' in lower or 'fat family senhor burger' in lower
                   elif kind == 'cta-final':
-                      match = 'chapa e brasas artesanais' in lower or 'burger artesanal pronto para pedir' in lower or 'final-' in lower
+                      match = 'burger artesanal pronto para pedir' in lower
+                  else:
+                      match = False
                   if not match:
                       continue
                   m = re.search(r'\ssrc="(https?://[^"]+)"', tag, flags=re.I)
