@@ -1,0 +1,10 @@
+name: Upload repaired local assets
+
+on:
+  workflow_dispatch:
+
+jobs:
+  noop:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Local binary assets are committed through Git data API; this workflow is a temporary marker only."
